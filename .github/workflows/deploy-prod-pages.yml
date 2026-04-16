@@ -32,20 +32,9 @@ jobs:
         run: npm run build
 
       - name: Publish dist to prod branch
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          mkdir -p /tmp/prod-branch
-          cp -R dist/. /tmp/prod-branch/
-
-          git switch --orphan prod-deploy-${GITHUB_RUN_ID}
-          git rm -rf . || true
-          cp -R /tmp/prod-branch/. .
-
-          touch .nojekyll
-
-          git add -A
-          git commit -m "Deploy from ${GITHUB_SHA}" || echo "No changes to commit"
-          git push origin HEAD:prod --force
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: prod
+          publish_dir: ./dist
+          force_orphan: true

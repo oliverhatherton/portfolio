@@ -1,4 +1,4 @@
-name: Build and Deploy to prod
+name: Build and Push to prod
 
 on:
   push:
@@ -10,12 +10,14 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  build-and-push-prod:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -29,10 +31,21 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy dist to prod branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: prod
-          publish_dir: ./dist
-          force_orphan: true
+      - name: Publish dist to prod branch
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          mkdir -p /tmp/prod-branch
+          cp -R dist/. /tmp/prod-branch/
+
+          git switch --orphan prod-deploy-${GITHUB_RUN_ID}
+          git rm -rf . || true
+          cp -R /tmp/prod-branch/. .
+
+          touch .nojekyll
+
+          git add -A
+          git commit -m "Deploy from ${GITHUB_SHA}" || echo "No changes to commit"
+          git push origin HEAD:prod --force

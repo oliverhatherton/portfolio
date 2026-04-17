@@ -1,9 +1,7 @@
+import Hero from "./components/hero";
+
 function App() {
-  return (
-    <main className="coming-soon">
-      <h1>Coming Soon!</h1>
-    </main>
-  );
+  return <Hero />;
 }
 
 export default App;

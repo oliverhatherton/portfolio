@@ -29,7 +29,6 @@
   font-size: clamp(4.2rem, 13vw, 11rem);
   font-weight: 800;
   line-height: 0.86;
-  letter-spacing: -0.055em;
 }
 
 .hero-title-line {

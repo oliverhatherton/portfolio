@@ -1,0 +1,9 @@
+.page-section {
+  width: 100%;
+  padding: var(--page-section-padding, 4rem 1.5rem);
+}
+
+.page-section > * {
+  width: min(var(--page-section-content-width, 72rem), 100%);
+  margin-inline: auto;
+}

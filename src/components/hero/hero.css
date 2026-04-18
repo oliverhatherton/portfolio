@@ -213,8 +213,25 @@
 }
 
 @media (max-width: 42rem) and (orientation: portrait) {
+  .hero-shell {
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: max(1.75rem, calc(1.75rem + env(safe-area-inset-bottom)));
+  }
+
+  .hero-title {
+    font-size: clamp(2.85rem, 12vw, 4.6rem);
+    line-height: 0.9;
+  }
+
   .hero-bottom {
+    margin-top: 0;
     gap: 0.85rem;
+  }
+
+  .hero-scroll-hint {
+    top: clamp(1rem, 2.5vw, 1.5rem);
   }
 
   .hero-right {
@@ -291,7 +308,7 @@
 
   .hero-scroll-line {
     width: 1px;
-    height: 1.9rem;
+    top: clamp(1rem, 2.5vw, 1.5rem);
   }
 
   .hero-scroll-text {

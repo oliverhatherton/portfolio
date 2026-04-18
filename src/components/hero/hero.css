@@ -191,12 +191,13 @@
   }
 
   .hero-scroll-hint {
-    top: auto;
-    right: 0;
-    bottom: max(1.4rem, calc(1.4rem + env(safe-area-inset-bottom)));
+    position: static;
+    margin-top: 0.5rem;
     flex-direction: row;
     gap: 0.45rem;
     align-items: center;
+    justify-content: center;
+    align-self: center;
   }
 
   .hero-scroll-line {
@@ -270,12 +271,12 @@
 
   .hero-scroll-hint {
     position: static;
-    margin-top: 0.15rem;
-    right: 0;
+    margin-top: 0.2rem;
     gap: 0.3rem;
     flex-direction: row;
     align-items: center;
-    align-self: flex-end;
+    justify-content: center;
+    align-self: center;
   }
 
   .hero-scroll-line {

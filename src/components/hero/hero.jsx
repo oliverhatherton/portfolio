@@ -1,5 +1,8 @@
 import "./hero.css";
 import PageSection from "../pageSection";
+import HeroPill from "./heroPill";
+import HeroScrollHint from "./heroScrollHint";
+import HeroTitle from "./heroTitle";
 
 export default function Hero({
   id = "hero",
@@ -15,32 +18,21 @@ export default function Hero({
       <div className="hero-shell">
         <p className="hero-eyebrow">{eyebrow}</p>
 
-        <h1 className="hero-title" aria-label={titleLines.join(" ")}>
-          {titleLines.map((line) => (
-            <span key={line} className="hero-title-line">
-              {line}
-            </span>
-          ))}
-        </h1>
+        <HeroTitle lines={titleLines} />
 
         <div className="hero-bottom">
           <p className="hero-desc">{description}</p>
 
           <div className="hero-right" aria-label="Hero metadata">
-            <p className="hero-pill">{location}</p>
-            <p className="hero-pill hero-pill-available">
+            <HeroPill>{location}</HeroPill>
+            <HeroPill className="hero-pill-available">
               <span className="hero-pill-dot" />
               {availability}
-            </p>
+            </HeroPill>
           </div>
         </div>
 
-        {showScrollHint ? (
-          <div className="hero-scroll-hint" aria-hidden="true">
-            <span className="hero-scroll-line" />
-            <span className="hero-scroll-text">Scroll</span>
-          </div>
-        ) : null}
+        {showScrollHint ? <HeroScrollHint /> : null}
       </div>
     </PageSection>
   );

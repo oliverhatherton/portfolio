@@ -216,29 +216,33 @@
   .hero-shell {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    gap: 0.85rem;
-    padding-top: 1rem;
-    padding-bottom: max(1.25rem, calc(1.25rem + env(safe-area-inset-bottom)));
+    gap: 0.35rem;
+    padding-top: 0.85rem;
+    padding-bottom: max(1rem, calc(1rem + env(safe-area-inset-bottom)));
   }
 
   .hero-eyebrow {
+    grid-row: 1;
     margin-bottom: 0;
   }
 
   .hero-title {
+    grid-row: 2;
     align-self: center;
-    font-size: clamp(3.1rem, 15vw, 5.2rem);
+    justify-self: start;
+    font-size: clamp(3.25rem, 13.5vw, 5rem);
     line-height: 0.9;
   }
 
   .hero-bottom {
+    grid-row: 3;
     margin-top: 0;
     align-self: end;
     gap: 0.85rem;
   }
 
   .hero-scroll-hint {
-    top: clamp(1rem, 2.5vw, 1.5rem);
+    top: clamp(0.75rem, 2vw, 1.25rem);
   }
 
   .hero-right {

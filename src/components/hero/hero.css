@@ -191,24 +191,24 @@
   }
 
   .hero-scroll-hint {
-    position: static;
-    margin-top: 0.5rem;
-    flex-direction: row;
+    position: absolute;
+    top: clamp(3.5rem, 8vw, 5rem);
+    right: 0;
+    margin-top: 0;
+    flex-direction: column;
     gap: 0.45rem;
     align-items: center;
-    justify-content: center;
-    align-self: center;
   }
 
   .hero-scroll-line {
-    width: 2rem;
-    height: 1px;
+    width: 1px;
+    height: 2.75rem;
   }
 
   .hero-scroll-text {
     font-size: clamp(0.5rem, 2vw, 0.6rem);
-    letter-spacing: 0.14em;
-    writing-mode: horizontal-tb;
+    letter-spacing: 0.16em;
+    writing-mode: vertical-lr;
   }
 }
 
@@ -270,23 +270,24 @@
   }
 
   .hero-scroll-hint {
-    position: static;
-    margin-top: 0.2rem;
+    position: absolute;
+    top: 0.85rem;
+    right: 0;
+    margin-top: 0;
     gap: 0.3rem;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    align-self: center;
   }
 
   .hero-scroll-line {
-    width: 1.25rem;
-    height: 1px;
+    width: 1px;
+    height: 1.9rem;
   }
 
   .hero-scroll-text {
     font-size: 0.48rem;
     letter-spacing: 0.12em;
+    writing-mode: vertical-lr;
   }
 }
 

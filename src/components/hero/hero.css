@@ -1,6 +1,7 @@
 .hero-section {
   --page-section-padding: 0 clamp(1.2rem, 3.4vw, 2.75rem);
   --page-section-content-width: 110rem;
+  overflow-x: clip;
 }
 
 .hero-shell {
@@ -9,6 +10,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  gap: clamp(1.5rem, 3vw, 3rem);
   padding: clamp(7rem, 10vw, 9rem) 0
     max(3rem, calc(3rem + env(safe-area-inset-bottom)));
 }
@@ -41,10 +43,11 @@
   justify-content: space-between;
   align-items: flex-end;
   gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .hero-desc {
-  max-width: 35ch;
+  max-width: 38ch;
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.65;
@@ -56,6 +59,7 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 0.6rem;
+  max-width: 100%;
 }
 
 .hero-pill {
@@ -69,7 +73,9 @@
   font-size: 0.64rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  white-space: nowrap;
+  line-height: 1.35;
+  max-width: 100%;
+  white-space: normal;
 }
 
 .hero-pill-available {
@@ -141,27 +147,45 @@
   }
 
   .hero-shell {
+    gap: 1.1rem;
+    padding-top: 4.75rem;
     padding-bottom: max(2.2rem, calc(2.2rem + env(safe-area-inset-bottom)));
   }
 
+  .hero-eyebrow {
+    margin-bottom: 0.9rem;
+    font-size: 0.62rem;
+  }
+
   .hero-title {
-    font-size: clamp(3.6rem, 14vw, 8rem);
+    font-size: clamp(2.9rem, 16vw, 5.9rem);
+    line-height: 0.9;
   }
 
   .hero-bottom {
+    margin-top: 0.25rem;
     flex-direction: column;
     align-items: flex-start;
     gap: 1.1rem;
   }
 
+  .hero-desc {
+    max-width: none;
+    font-size: 0.92rem;
+  }
+
   .hero-right {
     align-items: flex-start;
+    width: 100%;
+  }
+
+  .hero-pill {
+    width: fit-content;
+    font-size: 0.6rem;
   }
 
   .hero-scroll-hint {
-    top: auto;
-    right: 0.4rem;
-    bottom: max(1.6rem, calc(1.6rem + env(safe-area-inset-bottom)));
+    display: none;
   }
 
   .hero-scroll-line {

@@ -28,10 +28,11 @@
   margin: 0;
   color: var(--fg);
   font-family: "Syne", sans-serif;
-  font-size: clamp(4.2rem, 13vw, 11rem);
+  font-size: clamp(3.25rem, 11vw, 11rem);
   font-weight: 800;
-  line-height: 0.86;
+  line-height: 0.84;
   text-wrap: balance;
+  max-inline-size: 100%;
 }
 
 .hero-title-line {
@@ -163,8 +164,8 @@
   }
 
   .hero-title {
-    font-size: clamp(2.9rem, 14vw, 5.6rem);
-    line-height: 0.9;
+    font-size: clamp(2.6rem, 12.5vw, 5rem);
+    line-height: 0.88;
   }
 
   .hero-bottom {
@@ -212,7 +213,7 @@
 
 @media (max-width: 28rem) {
   .hero-title {
-    font-size: clamp(2.5rem, 15vw, 4.4rem);
+    font-size: clamp(2.3rem, 13vw, 4rem);
   }
 
   .hero-desc {
@@ -239,8 +240,8 @@
   }
 
   .hero-title {
-    font-size: clamp(2.3rem, 6.8vw, 4.3rem);
-    line-height: 0.9;
+    font-size: clamp(3rem, 8.8vw, 6rem);
+    line-height: 0.86;
   }
 
   .hero-bottom {

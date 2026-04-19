@@ -40,7 +40,7 @@
   margin: 0;
   color: var(--fg);
   font-family: "Syne", sans-serif;
-  font-size: clamp(3.25rem, 11vw, 8.25rem);
+  font-size: clamp(2.8rem, 11vw, 8.25rem);
   font-weight: 800;
   line-height: 0.84;
   text-wrap: balance;
@@ -56,7 +56,7 @@
   align-self: start;
   width: min(100%, clamp(26ch, 50vw, 38ch));
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: clamp(0.84rem, 1.1vw, 0.95rem);
   line-height: 1.65;
   font-weight: 300;
   min-width: 0;
@@ -179,16 +179,13 @@
     font-size: clamp(0.58rem, 1.9vw, 0.68rem);
   }
 
+  .hero-title {
+    font-size: clamp(2.2rem, 13vw, 4.1rem);
+  }
+
   .hero-desc {
+    font-size: clamp(0.76rem, 2.9vw, 0.9rem);
     width: min(100%, clamp(22ch, 50vw, 38ch));
-  }
-
-  .hero-footer {
-    align-items: flex-end;
-  }
-
-  .hero-right {
-    align-items: flex-end;
   }
 
   .hero-pill {
@@ -225,6 +222,12 @@
   }
 }
 
+@media (max-width: 56rem) {
+  .hero-footer {
+    display: none;
+  }
+}
+
 @media (max-width: 48rem) and (orientation: landscape) and (max-height: 32rem) {
   .hero-section {
     --page-section-padding: 0 1rem;
@@ -241,15 +244,13 @@
     gap: 0.55rem;
   }
 
-  .hero-right {
-    width: auto;
-    align-items: flex-end;
-    flex-shrink: 0;
+  .hero-title {
+    font-size: clamp(1.9rem, 8.4vw, 3rem);
   }
 
-  .hero-pill {
-    font-size: 0.54rem;
-    padding: 0.38rem 0.68rem;
+  .hero-desc {
+    font-size: clamp(0.68rem, 2vw, 0.82rem);
+    line-height: 1.5;
   }
 
   .hero-scroll-hint {

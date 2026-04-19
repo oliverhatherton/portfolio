@@ -1,7 +1,13 @@
 import Hero from "./components/hero";
+import About from "./components/about";
 
 function App() {
-  return <Hero />;
+  return (
+    <>
+      <Hero />
+      <About />
+    </>
+  );
 }
 
 export default App;

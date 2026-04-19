@@ -16,13 +16,15 @@ export default function Hero({
   return (
     <PageSection id={id} className="hero-section">
       <div className="hero-shell">
-        <p className="hero-eyebrow">{eyebrow}</p>
+        <div className="hero-copy">
+          <p className="hero-eyebrow">{eyebrow}</p>
 
-        <HeroTitle lines={titleLines} />
+          <HeroTitle lines={titleLines} />
 
-        <div className="hero-bottom">
           <p className="hero-desc">{description}</p>
+        </div>
 
+        <div className="hero-footer">
           <div className="hero-right" aria-label="Hero metadata">
             <HeroPill>{location}</HeroPill>
             <HeroPill className="hero-pill-available">

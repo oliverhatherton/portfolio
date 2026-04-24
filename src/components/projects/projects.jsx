@@ -49,12 +49,7 @@ export default function Projects({
             return (
               <li className="projects-item" key={project.title}>
                 {project.href ? (
-                  <a
-                    className="projects-card"
-                    href={project.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                  <a className="projects-card" href={project.href}>
                     {cardContent}
                   </a>
                 ) : (

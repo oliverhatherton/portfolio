@@ -5,7 +5,7 @@ const defaultProjects = [
   {
     title: "Task Queue",
     description:
-      "A live task management build with a clean workflow for tracking and prioritising work.",
+      "A real-time task queue built with Vue, Express, and Redis, exploring messaging patterns, concurrent processing, and system behaviour under load. Designed to reflect production-style architecture with a focus on performance and observability.",
     meta: "Live",
     href: "https://task-queue.oliverhatherton.com",
   },
@@ -26,8 +26,9 @@ export default function Projects({
             <h2 className="projects-title">{title}</h2>
           </div>
           <p className="projects-note">
-            A small placeholder set of builds, with one live project and a
-            couple of spaces reserved for the next additions.
+            A selection of projects exploring distributed systems, messaging
+            patterns, and real-time application design. Each build focuses on
+            performance, scalability, and production-style architecture.
           </p>
         </header>
 

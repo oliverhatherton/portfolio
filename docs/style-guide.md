@@ -8,6 +8,14 @@ This guide defines a consistent visual and implementation system for this projec
 - Use motion sparingly to support hierarchy and state change.
 - Prefer readable rhythm over dense layouts.
 - Reuse a small set of primitives and tokens before creating one-off styles.
+- Keep the layout feeling open and architectural: avoid heavy boxed UI shells.
+- Keep the visual language intentionally monotone first, then add accent only where meaning is needed.
+
+Interpretation notes:
+
+- This system is designed to feel like one continuous canvas, not a dashboard made of stacked container boxes.
+- Most surfaces should remain close to the background range (`--bg`/`--bg2`) with separation coming from spacing, typography, and subtle borders.
+- Accent color exists to direct attention, not to decorate every component.
 
 ## 2. Brand Foundation
 
@@ -88,6 +96,13 @@ Standards:
   - Internal block gaps: `clamp(1.6rem, 4vw, 3.5rem)`
 - Content max width for broad sections: `110rem`
 
+Container policy (important):
+
+- Do not wrap the entire page in a central framed "app container".
+- Do not introduce large, opaque box backgrounds around major sections unless a section's content truly requires local contrast.
+- Prefer full-bleed section rhythm and centered inner content rails over "boxed card stacking".
+- If a local container is needed for readability, keep it visually quiet: low-contrast background, thin border, and generous spacing.
+
 ## 4. Responsive Breakpoints
 
 Use these breakpoints consistently:
@@ -132,6 +147,11 @@ Card defaults:
   - Border to `var(--border-hover)`
   - `transform: translateY(-2px)`
 
+Card restraint rule:
+
+- Cards should organize content, not dominate the page chrome.
+- Avoid turning every block into a card; use whitespace and typographic hierarchy first.
+
 ### Pills/Tags
 
 Use pills for status, skills, and micro-metadata.
@@ -173,6 +193,8 @@ Pill defaults:
 
 For each subdomain (for example: blog, lab, writing), keep the same design language by reusing tokens and primitives.
 
+This includes keeping the same overall temperament: sparse, deliberate, mostly monotone, with restrained accents.
+
 ### Shared Foundation (must stay identical)
 
 - Global token names and values
@@ -180,6 +202,8 @@ For each subdomain (for example: blog, lab, writing), keep the same design langu
 - Radius and transition tokens
 - Section wrapper behavior (`PageSection` contract)
 - Breakpoint set
+- Open-canvas layout approach (no global framed container box)
+- Monotone baseline palette behavior
 
 ### Allowed Variation Per Subdomain
 
@@ -187,6 +211,52 @@ For each subdomain (for example: blog, lab, writing), keep the same design langu
 - Hero composition and imagery
 - Component mix (cards, timeline, gallery, list)
 - Maximum content width where domain requires it
+
+Keep in mind:
+
+- Variation should not replace the monotone-first baseline with rainbow UI.
+- If introducing additional colors, they must remain secondary to `--bg`, `--bg2`, `--fg`, and `--muted`.
+
+### Required Back Navigation For Non-Portfolio Deployments
+
+If this design system is used on any site that is not the main portfolio, include a visible back link near the top of the page to return to the main site.
+
+Requirement:
+
+- Place a "Back to oliverhatherton.com" control near the top-left region, above or adjacent to the first major heading.
+- Link target must be `https://oliverhatherton.com`.
+- Keep styling lightweight and consistent with the system: subtle border, muted text, compact pill/inline-link treatment.
+- Preserve keyboard focus visibility and clear hover/active states.
+
+Reference markup pattern:
+
+```html
+<a class="site-back-link" href="https://oliverhatherton.com">
+  Back to oliverhatherton.com
+</a>
+```
+
+Reference style pattern:
+
+```css
+.site-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.site-back-link:hover,
+.site-back-link:focus-visible {
+  border-color: var(--border-hover);
+  color: var(--fg);
+}
+```
 
 ### Setup Checklist For A New Subdomain
 

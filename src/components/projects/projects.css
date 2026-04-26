@@ -35,7 +35,7 @@
   color: var(--muted);
   font-size: 0.9rem;
   line-height: 1.65;
-  max-width: 34ch;
+  max-width: 50ch;
 }
 
 .projects-list {

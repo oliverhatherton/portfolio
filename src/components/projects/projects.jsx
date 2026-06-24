@@ -2,16 +2,7 @@ import "./projects.css";
 import PageSection from "../pageSection";
 import Icon from "../icon";
 
-const defaultProjects = [
-  {
-    title: "Distributed Task Queue",
-    description:
-      "A production-style task queue that holds ~3,200 requests a second across an API, worker and scheduler. It survives failure with retries, dead-letter queues, and lease-based job reassignment, while Prometheus and Grafana track latency and throughput. I load-tested it with K6 and put it on real infrastructure.",
-    meta: "Live",
-    href: "https://task-queue.oliverhatherton.com",
-    tech: ["Node.js", "RabbitMQ", "Redis", "Docker", "Kubernetes", "Terraform"],
-  },
-];
+const defaultProjects = [];
 
 export default function Projects({
   id = "projects",

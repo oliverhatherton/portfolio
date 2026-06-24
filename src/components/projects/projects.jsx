@@ -1,6 +1,6 @@
 import "./projects.css";
 import PageSection from "../pageSection";
-import Icon from "../icon/Icon.jsx";
+import Icon from "../icon";
 
 const defaultProjects = [
   {

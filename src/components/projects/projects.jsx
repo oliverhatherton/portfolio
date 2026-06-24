@@ -18,10 +18,12 @@ export default function Projects({
             <p className="projects-label">{label}</p>
             <h2 className="projects-title">{title}</h2>
           </div>
-          <p className="projects-note">
-            Things I've built to dig into distributed systems and messaging.
-            Each one chases real throughput and production-style architecture.
-          </p>
+          {projects.length > 0 ? (
+            <p className="projects-note">
+              Things I've built to dig into distributed systems and messaging.
+              Each one chases real throughput and production-style architecture.
+            </p>
+          ) : null}
         </header>
 
         {projects.length === 0 ? (

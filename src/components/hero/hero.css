@@ -1,12 +1,33 @@
 .hero-section {
   --page-section-padding: 0 clamp(1.2rem, 3.4vw, 2.75rem);
   --page-section-content-width: 110rem;
+  position: relative;
   overflow-x: clip;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      70rem 48rem at 22% 32%,
+      var(--accent-soft),
+      transparent 70%
+    ),
+    radial-gradient(
+      56rem 40rem at 88% 14%,
+      rgba(255, 122, 92, 0.05),
+      transparent 72%
+    );
 }
 
 .hero-shell {
   min-height: 100svh;
   position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: clamp(1.5rem, 3vw, 3rem);
@@ -16,16 +37,18 @@
 
 .hero-copy {
   flex: 1;
-  display: grid;
-  grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr);
-  justify-items: start;
-  gap: clamp(0.85rem, 1.8vw, 1.35rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: clamp(1.1rem, 1.8vw, 1.6rem);
   min-height: 0;
 }
 
 .hero-eyebrow {
-  grid-row: 1;
-  align-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   color: var(--muted);
   font-size: 0.68rem;
   font-weight: 500;
@@ -34,9 +57,16 @@
   margin: 0;
 }
 
+.hero-eyebrow-dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0.5rem var(--accent);
+  flex: none;
+}
+
 .hero-title {
-  grid-row: 2;
-  align-self: center;
   margin: 0;
   color: var(--fg);
   font-family: "Syne", sans-serif;
@@ -52,11 +82,9 @@
 }
 
 .hero-desc {
-  grid-row: 3;
-  align-self: start;
-  width: min(100%, clamp(26ch, 50vw, 38ch));
+  width: min(100%, clamp(26ch, 50vw, 44ch));
   color: var(--muted);
-  font-size: clamp(0.84rem, 1.1vw, 0.95rem);
+  font-size: clamp(0.88rem, 1.15vw, 1rem);
   line-height: 1.65;
   font-weight: 300;
   min-width: 0;
@@ -66,8 +94,9 @@
 
 .hero-footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: flex-end;
+  gap: 1.25rem;
   width: 100%;
 }
 
@@ -223,8 +252,12 @@
 }
 
 @media (max-width: 56rem) {
-  .hero-footer {
+  .hero-right {
     display: none;
+  }
+
+  .hero-footer {
+    justify-content: flex-start;
   }
 }
 

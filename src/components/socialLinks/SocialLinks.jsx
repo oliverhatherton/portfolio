@@ -1,5 +1,5 @@
 import "./socialLinks.css";
-import Icon from "../icon/Icon.jsx";
+import Icon from "../icon";
 import { socials } from "../../data/profile";
 
 export default function SocialLinks({ variant = "compact", className = "" }) {

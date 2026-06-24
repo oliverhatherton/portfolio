@@ -1,5 +1,6 @@
 import "./hero.css";
 import PageSection from "../pageSection";
+import SocialLinks from "../socialLinks";
 import HeroPill from "./heroPill";
 import HeroScrollHint from "./heroScrollHint";
 import HeroTitle from "./heroTitle";
@@ -8,16 +9,19 @@ export default function Hero({
   id = "hero",
   eyebrow = "Backend-Focused Software Engineer",
   titleLines = ["Oliver", "Atherton"],
-  description = "Software Engineering (BSc) student at the University of Huddersfield, expecting a First Class degree, with a passion for backend development. Experience in building complex systems and APIs, gained from my year in industry placement at Babcock International.",
+  description = "Final-year Software Engineering student at Huddersfield, on track for a First Class degree. I build backend systems and APIs, and I spent my placement year at Babcock International shipping production software with an engineering team.",
   location = "Huddersfield, UK",
-  availability = "Seeking Graduate Backend Roles (Mid 2027 Start)",
+  availability = "Seeking Graduate Backend Roles · Mid 2027",
   showScrollHint = true,
 }) {
   return (
     <PageSection id={id} className="hero-section">
       <div className="hero-shell">
         <div className="hero-copy">
-          <p className="hero-eyebrow">{eyebrow}</p>
+          <p className="hero-eyebrow">
+            <span className="hero-eyebrow-dot" />
+            {eyebrow}
+          </p>
 
           <HeroTitle lines={titleLines} />
 
@@ -25,6 +29,8 @@ export default function Hero({
         </div>
 
         <div className="hero-footer">
+          <SocialLinks variant="compact" className="hero-socials" />
+
           <div className="hero-right" aria-label="Hero metadata">
             <HeroPill>{location}</HeroPill>
             <HeroPill className="hero-pill-available">

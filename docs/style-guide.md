@@ -25,18 +25,30 @@ Use these as your canonical palette:
 
 - `--bg`: `#0c0c0b` (main background)
 - `--bg2`: `#141413` (secondary background)
+- `--surface`: `rgba(237, 237, 232, 0.025)` (faint raised surface for cards/figures)
 - `--fg`: `#edede8` (primary text)
 - `--muted`: `#93938f` (secondary text)
+- `--muted-strong`: `#b6b6b1` (brighter muted — tag/pill labels, tech tokens)
 - `--border`: `rgba(237, 237, 232, 0.09)` (subtle separators)
 - `--border-hover`: `rgba(237, 237, 232, 0.38)` (hover/active separators)
 - `--accent`: `#ff3d00` (primary accent)
 - `--accent2`: `#ff7a5c` (accent gradient pair)
+- `--accent-soft`: `rgba(255, 61, 0, 0.14)` (glow washes, `::selection`)
+
+A semantic "live/available" green is used sparingly for status only (availability
+pill, live project dot): base `#00dc64`, mixed lighter for text
+(`color-mix(in srgb, #00dc64 82%, white 18%)`). It is a status signal, not a
+palette color — do not use it for general UI.
 
 Usage rules:
 
 - Use `--fg` on `--bg` for primary content.
-- Use `--muted` for supporting text, metadata, and labels.
-- Use accent colors only for highlights, not large text blocks.
+- Use `--muted` for supporting text, metadata, and labels; `--muted-strong` when a
+  muted element needs slightly more presence (e.g. tech tags).
+- Use `--surface` for the faint fill on cards, stat figures, and labelled links —
+  never a hard opaque panel.
+- Use accent colors only for highlights, glows, and gradient text accents, not
+  large text blocks.
 - Keep gradients subtle, mostly overlays with low opacity.
 
 ### Typography
@@ -54,15 +66,53 @@ Role mapping:
 ### Radius and Motion
 
 - Corner radius token: `--radius: 14px`
+- Large radius token: `--radius-lg: 20px` (larger surfaces, hero-scale cards)
 - Pill radius: `999px`
-- Global transition token:
-  - `--transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)`
+- Transition tokens:
+  - `--transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)` (section/structural motion)
+  - `--transition-fast: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)` (hovers, micro-interactions)
 
 Animation rules:
 
+- Use `--transition-fast` for hover/focus feedback (color, border, small
+  `translateY(-2px)` lifts); use `--transition` for larger/structural changes.
 - Keep loops subtle and low-frequency.
 - Avoid more than one continuously looping animation per section.
 - Prefer opacity/transform over layout-affecting properties.
+
+### Base / Global Styles
+
+Every deployment inherits the same base layer from `src/index.css`:
+
+- Body uses font smoothing (`-webkit-font-smoothing: antialiased`) and
+  `text-rendering: optimizeLegibility`.
+- `::selection` uses `--accent-soft` background with `--fg` text.
+- Global `:focus-visible` ring: `2px solid color-mix(in srgb, var(--accent2) 70%, transparent)` with `outline-offset: 3px`.
+- A global `prefers-reduced-motion` guard disables animations and long transitions.
+
+```css
+::selection {
+  background: var(--accent-soft);
+  color: var(--fg);
+}
+
+:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent2) 70%, transparent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+```
 
 ## 3. Layout System
 
@@ -161,7 +211,129 @@ Pill defaults:
 - Border: `1px solid var(--border)`
 - Radius: `999px`
 - Size: compact (`0.38rem-0.66rem` text size depending on role)
-- Uppercase, tracked text for utility tags
+- Uppercase, tracked text for utility/status tags (e.g. `LOCATION`, `LIVE`)
+- Tech/skill tags use sentence case, `--muted-strong` text, and brighten to
+  `--fg` with `--border-hover` on hover
+
+### Grouped Tags (Toolkit)
+
+When listing technologies or capabilities, group them under short uppercase
+labels rather than one flat cloud. Each group is a label + a wrapping pill row.
+
+- Group label: `0.64rem`, uppercase, `0.12em` tracking, `--muted`
+- Pills: tech-tag style above
+- Stack groups with `~1rem` gap
+
+This is the canonical way to present a stack/skill set across subdomains.
+
+### Stat Figures
+
+Use a figures strip to surface a few hard numbers (counts, percentages, ranks).
+
+- Grid of equal cells, `--surface` fill, `--border`, `--radius-lg`
+- Value: `Syne 800`, large, with an accent gradient text treatment
+- Label: `~0.72rem`, `--muted`
+- Hover: border to `--border-hover`, slightly lighter fill
+- Keep to 3-4 figures; collapse `4 -> 2` columns at `42rem`
+
+Feature one figure (the headline achievement) with an accent variant: an
+accent-tinted border (`color-mix(in srgb, var(--accent) 38%, transparent)`), a
+faint `--accent-soft` gradient fill, and an accent gradient on the value
+(`linear-gradient(120deg, var(--accent2), var(--accent))`). Use this for at most
+one figure so it stays the focal point.
+
+```css
+.figure-value {
+  font-family: "Syne", sans-serif;
+  font-weight: 800;
+  background: linear-gradient(120deg, var(--fg), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+```
+
+Gradient-on-text is the one approved decorative use of the accent in large type.
+Use it only for short display figures, never for body or sentence-length text.
+
+### Social / Contact Links
+
+A single shared `SocialLinks` primitive with two variants, driven by one data
+source (`src/data/profile.js`). Reuse it verbatim on every subdomain so links and
+handles stay in sync.
+
+- `compact` — icon-only circular buttons (`2.4rem`), for headers/heroes. Hover
+  lifts `-2px`, fills `--surface`, brightens to `--fg`.
+- `expanded` — labelled rows (icon + label + handle) in `--radius` cards with
+  `--surface` fill, for contact sections.
+
+Icons are inline SVG (GitHub, LinkedIn, mail), never emoji. Icon-only links carry
+an `.sr-only` label for screen readers.
+
+### Status Dot
+
+A small pulsing dot signals live/available state, paired with text (never color
+alone):
+
+- Availability: `--muted`-adjacent green, gentle opacity pulse (`2s`)
+- Live project: green dot with an expanding `box-shadow` ping (`~2.4s`)
+- Hero eyebrow: solid `--accent` dot with a soft accent glow (no animation)
+
+### Accent Glow
+
+For hero/landing atmosphere, layer one or two large, low-opacity radial gradients
+behind the content (using `--accent-soft` and a faint `--accent2` wash). Use at
+most one glow layer per page. It sets mood, not section decoration.
+
+Make the glow full-bleed. `PageSection` centres its direct children inside a
+content rail, so a glow placed as a child gets clipped to that rail and stops
+short of the screen edges. Put the glow on the section itself with `::before`,
+which spans the full section width:
+
+```css
+.hero-section {
+  position: relative;
+  overflow-x: clip;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(70rem 48rem at 22% 32%, var(--accent-soft), transparent 70%),
+    radial-gradient(56rem 40rem at 88% 14%, rgba(255, 122, 92, 0.05), transparent 72%);
+}
+
+.hero-shell {
+  position: relative;
+  z-index: 1;
+}
+```
+
+### Contact / Footer Section
+
+Close every page with a contact section as the final `PageSection`:
+
+- Two columns: a `Syne 800` headline + lead + email CTA + availability status on
+  the left; `SocialLinks` (`expanded`) on the right. Collapse to one column at `64rem`.
+- Email CTA: `Syne 700`, animated underline grown via `background-size` on hover.
+- A thin `--border`-topped footer row with copyright + a short tagline.
+
+### Voice & Copy
+
+Keep written copy in a plain, direct, first-person voice. The rules below come
+from the `stop-slop` skill and apply to every subdomain:
+
+- Write in active voice. Put a person (usually "I") at the front of the sentence.
+- Cut adverbs and filler ("really", "just", "always", "simply").
+- No em dashes. Use commas or full stops.
+- Two items beat three. Avoid the rhythmic list-of-three.
+- State the point. Skip throat-clearing ("Here's what", "The truth is").
+- Name specifics (numbers, tech, places) instead of vague claims.
+- Vary sentence length so paragraphs do not read metronomic.
 
 ## 6. Accessibility and Quality Bar
 
@@ -188,6 +360,10 @@ Pill defaults:
   - `hero-*`, `about-*`, `projects-*`
 - Avoid deep selector chains.
 - Avoid global element styling outside `src/index.css` resets/tokens.
+- Reset default UA spacing on structural lists. A `<ul>`/`<ol>`/`<dl>` used for
+  layout keeps its browser `margin` and `padding-inline-start` (~40px) unless you
+  zero them, which silently indents rows out of alignment with their heading. Set
+  `margin: 0; padding: 0` whenever you set `list-style: none`.
 
 ## 8. Subdomain Reuse Strategy
 
@@ -260,12 +436,16 @@ Reference style pattern:
 
 ### Setup Checklist For A New Subdomain
 
-1. Copy token block and reset rules from `src/index.css`.
-2. Copy `PageSection` implementation and keep token names unchanged.
-3. Reuse section header pattern and card/pill primitives.
-4. Apply only accent-level visual variation first.
-5. Validate mobile behavior at `64rem` and `42rem`.
-6. Run an accessibility pass for contrast and keyboard focus.
+1. Copy the token block, base/global styles, and reset rules from `src/index.css`.
+2. Copy `PageSection`, `Icon`, and `SocialLinks` (+ `src/data/profile.js`); keep
+   token and component names unchanged.
+3. Reuse section header, card, pill, grouped-tag, stat-figure, and contact/footer
+   patterns before authoring anything new.
+4. Add the required "Back to oliverhatherton.com" link (see below) on any
+   non-portfolio deployment.
+5. Apply only accent-level visual variation first.
+6. Validate mobile behavior at `64rem` and `42rem`; confirm no horizontal scroll.
+7. Run an accessibility pass for contrast, `:focus-visible`, and reduced motion.
 
 ## 9. Copy-Ready Starter Tokens
 
@@ -275,16 +455,28 @@ Use this as the base in any new subdomain stylesheet:
 :root {
   --bg: #0c0c0b;
   --bg2: #141413;
+  --surface: rgba(237, 237, 232, 0.025);
   --fg: #edede8;
   --muted: #93938f;
+  --muted-strong: #b6b6b1;
   --border: rgba(237, 237, 232, 0.09);
   --border-hover: rgba(237, 237, 232, 0.38);
   --accent: #ff3d00;
   --accent2: #ff7a5c;
+  --accent-soft: rgba(255, 61, 0, 0.14);
   --radius: 14px;
+  --radius-lg: 20px;
   --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-fast: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 ```
+
+Shared primitives to copy alongside the tokens (keep names unchanged):
+
+- `PageSection` — section wrapper contract
+- `Icon` (`src/components/icon`) — inline SVG set
+- `SocialLinks` (`src/components/socialLinks`) + `src/data/profile.js` — links/handles
+- Stat figures, grouped-tag (toolkit), card, pill, and contact/footer patterns
 
 ## 10. Governance
 

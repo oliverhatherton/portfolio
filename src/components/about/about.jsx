@@ -1,15 +1,17 @@
 import "./about.css";
 import PageSection from "../pageSection";
 import AboutBio from "./aboutBio";
+import AboutFigures from "./aboutFigures";
 import AboutListSection from "./aboutListSection";
-import AboutSkillsSection from "./aboutSkillsSection";
-import { bioParagraphs, experience, highlights, skills } from "./aboutData";
+import AboutToolkit from "./aboutToolkit";
+import { bioParagraphs, experience, figures, toolkit } from "./aboutData";
+import { profile } from "../../data/profile";
 
 export default function About({
   id = "about",
   label = "My background",
   title = "About",
-  cvHref = "//TODO: add cv link",
+  cvHref = profile.cvHref,
 }) {
   return (
     <PageSection id={id} className="about-section">
@@ -21,13 +23,14 @@ export default function About({
           </div>
         </header>
 
+        <AboutFigures figures={figures} />
+
         <div className="about-grid">
           <AboutBio paragraphs={bioParagraphs} cvHref={cvHref} />
 
           <aside className="about-side" aria-label="About highlights">
             <AboutListSection heading="Experience" items={experience} />
-            <AboutListSection heading="Highlights" items={highlights} />
-            <AboutSkillsSection skills={skills} />
+            <AboutToolkit toolkit={toolkit} />
           </aside>
         </div>
       </div>

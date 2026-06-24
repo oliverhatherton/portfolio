@@ -1,4 +1,4 @@
-import Icon from "../icon/Icon";
+import Icon from "../icon/Icon.jsx";
 
 export default function AboutBio({ paragraphs, cvHref }) {
   return (

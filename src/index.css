@@ -106,7 +106,7 @@ select {
   font: inherit;
 }
 
-/* Global scrollbar fallback — .t-screen defines its own themed scrollbar. */
+/* Global scrollbar fallback - .t-screen defines its own themed scrollbar. */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;

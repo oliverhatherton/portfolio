@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 /* Live next-race lookup (Jolpica's Ergast-compatible F1 API) for the
-   "watching" line — falls back to a static label if the fetch fails. */
+   "watching" line - falls back to a static label if the fetch fails. */
 export default function NextRaceLine() {
   const [label, setLabel] = useState("Formula 1");
 

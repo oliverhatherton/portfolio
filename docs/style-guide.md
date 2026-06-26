@@ -28,7 +28,7 @@ Use these as your canonical palette:
 - `--surface`: `rgba(237, 237, 232, 0.025)` (faint raised surface for cards/figures)
 - `--fg`: `#edede8` (primary text)
 - `--muted`: `#93938f` (secondary text)
-- `--muted-strong`: `#b6b6b1` (brighter muted — tag/pill labels, tech tokens)
+- `--muted-strong`: `#b6b6b1` (brighter muted - tag/pill labels, tech tokens)
 - `--border`: `rgba(237, 237, 232, 0.09)` (subtle separators)
 - `--border-hover`: `rgba(237, 237, 232, 0.38)` (hover/active separators)
 - `--accent`: `#ff3d00` (primary accent)
@@ -38,14 +38,14 @@ Use these as your canonical palette:
 A semantic "live/available" green is used sparingly for status only (availability
 pill, live project dot): base `#00dc64`, mixed lighter for text
 (`color-mix(in srgb, #00dc64 82%, white 18%)`). It is a status signal, not a
-palette color — do not use it for general UI.
+palette color - do not use it for general UI.
 
 Usage rules:
 
 - Use `--fg` on `--bg` for primary content.
 - Use `--muted` for supporting text, metadata, and labels; `--muted-strong` when a
   muted element needs slightly more presence (e.g. tech tags).
-- Use `--surface` for the faint fill on cards, stat figures, and labelled links —
+- Use `--surface` for the faint fill on cards, stat figures, and labelled links -
   never a hard opaque panel.
 - Use accent colors only for highlights, glows, and gradient text accents, not
   large text blocks.
@@ -262,9 +262,9 @@ A single shared `SocialLinks` primitive with two variants, driven by one data
 source (`src/data/profile.js`). Reuse it verbatim on every subdomain so links and
 handles stay in sync.
 
-- `compact` — icon-only circular buttons (`2.4rem`), for headers/heroes. Hover
+- `compact` - icon-only circular buttons (`2.4rem`), for headers/heroes. Hover
   lifts `-2px`, fills `--surface`, brightens to `--fg`.
-- `expanded` — labelled rows (icon + label + handle) in `--radius` cards with
+- `expanded` - labelled rows (icon + label + handle) in `--radius` cards with
   `--surface` fill, for contact sections.
 
 Icons are inline SVG (GitHub, LinkedIn, mail), never emoji. Icon-only links carry
@@ -473,9 +473,9 @@ Use this as the base in any new subdomain stylesheet:
 
 Shared primitives to copy alongside the tokens (keep names unchanged):
 
-- `PageSection` — section wrapper contract
-- `Icon` (`src/components/icon`) — inline SVG set
-- `SocialLinks` (`src/components/socialLinks`) + `src/data/profile.js` — links/handles
+- `PageSection` - section wrapper contract
+- `Icon` (`src/components/icon`) - inline SVG set
+- `SocialLinks` (`src/components/socialLinks`) + `src/data/profile.js` - links/handles
 - Stat figures, grouped-tag (toolkit), card, pill, and contact/footer patterns
 
 ## 10. Governance

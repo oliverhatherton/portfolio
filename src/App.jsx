@@ -1,17 +1,7 @@
-import Hero from "./components/hero";
-import About from "./components/about";
-import Projects from "./components/projects";
-import Contact from "./components/contact";
+import Terminal from "./components/terminal";
 
 function App() {
-  return (
-    <>
-      <Hero />
-      <About />
-      <Projects />
-      <Contact />
-    </>
-  );
+  return <Terminal />;
 }
 
 export default App;

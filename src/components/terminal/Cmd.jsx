@@ -1,4 +1,4 @@
-/* A clickable command — runs the full `portfolio <sub>` form. */
+/* A clickable command that runs the full `portfolio <sub>` form. */
 export default function Cmd({ sub, ctx, children }) {
   return (
     <button

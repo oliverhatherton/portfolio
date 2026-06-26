@@ -1,29 +1,29 @@
 export const bioParagraphs = [
-  "It started on a second-hand MacBook running Minecraft at about 45fps. I got my first coding book at ten and never really stopped — IT at school, GCSE and A-Level Computer Science, and now a BSc in Software Engineering at the University of Huddersfield, on track for First-Class Honours. I didn't fall into this field; I kept choosing it.",
-  "What pulled me in is the mix of art and engineering — there are always a dozen ways to solve a problem, and finding the elegant one is the fun part. I care most about understanding things properly: how a system behaves under load, why a design decision was made, what happens when the network drops a packet. Surface-level knowledge has never sat well with me.",
-  "I joined Babcock International in Bristol as a Year in Industry Software Engineer, and it's where I found my love for backend work. My first project was a monitoring and configuration platform for specialist hardware — handed to me as a Rust, Tokio and Tauri codebase having never written a line of Rust, a few months of deliberate daily learning later I was shipping features and fixing defects in it. My second project moved me onto command-and-control software for radio equipment in Java and Vue, where I've since pulled 16 near-duplicate endpoints down to 8, untangling logic that existed mostly to do the same thing slightly differently.",
-  "Outside of work I build things to understand them properly — currently order-lifecycle-backend, a NestJS reference backend that models an order's full life as an event-driven workflow over RabbitMQ: idempotent consumers, dead-letter queues, the dual-write problem, recovery from partial failure. It's less a product and more a worked example of the patterns a real distributed system needs.",
-  "Away from a keyboard I'm a McLaren die-hard — lights out on a Sunday and you won't get much out of me — into motorsport more broadly (WEC, WRC, IndyCar), a bit of sim racing and gaming, and there's pretty much always music on while I build. I'm looking for a graduate backend role from mid-2027, somewhere I can take on difficult problems and be trusted to either know the answer or go and find it.",
+  "It started on a second-hand MacBook running Minecraft at about 45fps which got me hooked on how software worked. I the got my first coding book at ten and never really stopped. Computer Science at school, GCSE and A-Level Computer Science, and now a BSc in Software Engineering at the University of Huddersfield, on track for First-Class Honours. I didn't fall into this field; I kept choosing it.",
+  "What pulled me in is the mix of art and engineering, there are always a dozen ways to solve a problem, and finding the elegant one is the fun part. I care most about understanding things properly: how a system behaves under load, why a design decision was made, what happens when the network drops a packet. Surface-level knowledge has never sat well with me.",
+  "I joined Babcock International in Bristol as a Year in Industry Software Engineer, and it's where I found my love for backend work. My first project was a monitoring and configuration platform for specialist hardware, handed to me a codebase using Rust, Tokio and Tauri. Having never written a line of Rust, a couple of months of deliberate daily learning later I was shipping features and fixing defects in it. My second project moved me onto command-and-control software for radio equipment in Java and Vue, where I've since been contributing effectively completing 11 tickets comprised of user stories, tech debt and bugs just over 3 months.",
+  "Outside of work I build things to understand them properly. Currently I'm working on my Order Lifecycle Application, currently I'm working on just the backend which is NestJS reference backend that models an order's full life as an event-driven workflow over RabbitMQ: idempotent consumers, dead-letter queues, the dual-write problem, recovery from partial failure. It's less a product and more a worked example of the patterns a real distributed system needs.",
+  "Away from a keyboard I'm a McLaren F1 die-hard, lights out on a Sunday and you won't get much out of me. I'm also into motorsport more broadly (WEC, IMSA, GTWC), a bit of sim racing and gaming, and there's pretty much always music on while I build. I'm looking for a graduate backend role from mid-2027, somewhere I can take on difficult problems and be trusted to either know the answer or go and find it.",
 ];
 
 export const experience = [
   {
     title: "Babcock International",
     subtitle:
-      "Year in Industry Software Engineer · Bristol — monitoring & configuration platform (Rust, Tokio, Tauri), then command & control software for radio equipment (Java, Vue)",
-    meta: "2025 — 26",
+      "Year in Industry Software Engineer · Bristol - monitoring & configuration platform (Rust, Tokio, Tauri), then command & control software for radio equipment (Java, Vue)",
+    meta: "2025 - 26",
   },
   {
     title: "Babcock Internal Hackathon",
     subtitle:
-      "Backend Lead, 3 months into placement · convoy management platform — finished runner-up, one team member short of every other team",
+      "Backend Lead, 3 months into placement · convoy management platform - finished runner-up, one team member short of every other team",
     meta: "2025",
   },
   {
     title: "University of Huddersfield",
     subtitle:
-      "BSc (Hons) Software Engineering · on track for a First — 91% Operating Systems, 81% Software Design & Development, 79% Computer Architecture",
-    meta: "2023 — 27",
+      "BSc (Hons) Software Engineering · on track for a First - 91% Operating Systems, 81% Software Design & Development, 79% Computer Architecture",
+    meta: "2023 - 27",
   },
 ];
 
@@ -83,15 +83,15 @@ export const achievements = [
   {
     title: "hackathon leadership",
     detail:
-      "Led backend development at a Babcock internal hackathon just three months into placement — one team member short of every other team, and pair-programming with a teammate who'd started coding only three months earlier. Finished runner-up.",
+      "Led backend development at a Babcock internal hackathon just three months into placement. Our team was one team member short of every other team, and we had a teammate who'd started coding only three months earlier who required pair programming to be able to contribute. Finished runner-up.",
   },
 ];
 
 export const interests = [
-  "Formula 1 — McLaren, papaya through and through",
+  "Formula 1 - McLaren, papaya through and through",
   "Motorsport more broadly: WEC, WRC, IMSA, GT World Challenge",
   "Cars and automotive engineering",
-  "Music — there's pretty much always something playing while I build",
+  "Music - there's pretty much always something playing while I build",
   "Go-karting",
   "Chess",
   "GeoGuessr",
@@ -102,7 +102,7 @@ export const values = ["curiosity", "integrity", "ownership", "growth", "family"
 
 export const currently = {
   workingOn: ["Order Lifecycle Application"],
-  learning: ["System design — through building the Order Lifecycle Application"],
+  learning: ["System design through building the Order Lifecycle Application"],
   // "watching" is computed live in the terminal component from the F1 API.
   lookingFor: ["graduate backend opportunities (2027)"],
 };

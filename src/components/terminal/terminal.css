@@ -141,7 +141,7 @@
   font-weight: 600;
 }
 
-/* clickable command / link — plain green text */
+/* clickable command / link, plain green text */
 .t-cmd {
   font-family: var(--mono);
   font-size: inherit;
@@ -192,7 +192,7 @@
   flex-direction: column;
 }
 
-/* rated rows (skills, grades) — name ... dotted leader ... score */
+/* rated rows (skills, grades), name ... dotted leader ... score */
 .t-rate-list {
   display: flex;
   flex-direction: column;
@@ -259,7 +259,7 @@
   color: var(--t-green-dim);
 }
 
-/* `all` — stacked sections */
+/* `all`, stacked sections */
 .t-all {
   display: flex;
   flex-direction: column;

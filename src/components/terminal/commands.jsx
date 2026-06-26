@@ -191,9 +191,7 @@ export const subcommands = {
     run: () => (
       <div className="t-block">
         <p className="t-line">
-          Looking for graduate backend roles from mid-2027 — somewhere I can
-          work on real engineering challenges and big systems, and find the
-          elegant solution rather than just a working one.
+          Looking for graduate backend roles starting from mid-2027 at a company where I can work on real engineering challenges and big systems, and find the elegant solution rather than just a working one.
         </p>
         <div className="t-lines">
           <p className="t-line">
@@ -257,30 +255,10 @@ export const subcommands = {
       </div>
     ),
   },
-
-  // hidden extras
-  f1: {
-    hidden: true,
-    run: () => (
-      <p className="t-line">
-        McLaren through and through. Lights out on a Sunday and you'll struggle
-        to get a word out of me.
-      </p>
-    ),
-  },
-  music: {
-    hidden: true,
-    run: () => (
-      <p className="t-line">
-        There's almost always something playing while I build. Good code and a
-        good record go together.
-      </p>
-    ),
-  },
   sudo: {
     hidden: true,
     run: () => (
-      <p className="t-line">nice try — you don't have the keys to this box.</p>
+      <p className="t-line">nice try! you don't have the keys to this box.</p>
     ),
   },
 };
@@ -353,7 +331,7 @@ export function resolveSub(name) {
   return key ? subcommands[key] : null;
 }
 
-/* names offered by Tab autocomplete (after `portfolio `) — kept in help order. */
+/* names offered by Tab autocomplete (after `portfolio `), kept in help order. */
 export const subNames = [
   ...HELP_ORDER.filter((n) => n !== "clear"),
   "clear",

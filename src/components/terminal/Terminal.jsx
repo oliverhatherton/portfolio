@@ -218,15 +218,14 @@ export default function Terminal() {
           <span className="t-lights" aria-hidden="true">
             <i /><i /><i />
           </span>
-          <span className="t-titlebar-text">oliverhatherton — zsh</span>
+          <span className="t-titlebar-text">oliverhatherton - zsh</span>
         </header>
 
         <main
           className="t-screen"
           ref={screenRef}
           onClick={() => {
-            // Don't steal focus right after a text selection — focusing the
-            // input would otherwise collapse it, breaking copy.
+            // Don't steal focus right after a text selection focusing the input would otherwise collapse it, breaking copy.
             const selection = window.getSelection?.();
             if (selection && selection.toString().length > 0) return;
             inputRef.current?.focus();
@@ -277,7 +276,7 @@ export default function Terminal() {
 function Banner() {
   return (
     <div className="t-block">
-      <p className="t-line">Oliver Atherton — backend-focused software engineer</p>
+      <p className="t-line">Oliver Atherton - backend-focused software engineer</p>
       <p className="t-line">
         try <span className="t-strong">portfolio --help</span> to start
         navigating
@@ -291,8 +290,7 @@ function WelcomeBack() {
     <div className="t-block">
       <p className="t-line">Welcome back.</p>
       <p className="t-line t-dim">
-        Screen's clear — <span className="t-strong">portfolio --help</span> if
-        you need the list again.
+        Screen's clear, <span className="t-strong">portfolio --help</span> if you need the list again.
       </p>
     </div>
   );

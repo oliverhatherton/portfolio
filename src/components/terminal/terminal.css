@@ -1,0 +1,302 @@
+.terminal {
+  --t-green: #4ade80;
+  --t-green-bright: #86efac;
+  --t-green-dim: rgba(74, 222, 128, 0.55);
+  --t-black: #050706;
+
+  height: 100svh;
+  width: 100%;
+  display: flex;
+  padding: clamp(0.6rem, 2.4vw, 2rem);
+}
+
+/* ---- Mac-style window ---- */
+.t-window {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  background: var(--t-black);
+  border: 1px solid rgba(74, 222, 128, 0.28);
+  border-radius: 12px;
+  box-shadow:
+    0 50px 130px -40px rgba(0, 0, 0, 0.9),
+    0 0 70px -34px rgba(74, 222, 128, 0.28),
+    0 0 0 1px rgba(74, 222, 128, 0.04);
+  overflow: hidden;
+}
+
+.t-titlebar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 38px;
+  padding: 0 1rem;
+  background: #0c0f0d;
+  border-bottom: 1px solid rgba(74, 222, 128, 0.12);
+  flex: none;
+}
+.t-lights {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+.t-lights i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.t-lights i:nth-child(1) {
+  background: #ff5f57;
+}
+.t-lights i:nth-child(2) {
+  background: #febc2e;
+}
+.t-lights i:nth-child(3) {
+  background: #28c840;
+}
+.t-titlebar-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  color: var(--t-green-dim);
+}
+
+/* ---- Screen ---- */
+.t-screen {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: clamp(1rem, 3vw, 1.8rem);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--t-green);
+  cursor: text;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(74, 222, 128, 0.4) transparent;
+}
+.t-screen::-webkit-scrollbar {
+  width: 10px;
+}
+.t-screen::-webkit-scrollbar-track {
+  background: transparent;
+  border-left: 1px solid rgba(74, 222, 128, 0.1);
+}
+.t-screen::-webkit-scrollbar-thumb {
+  background: rgba(74, 222, 128, 0.35);
+  border-radius: 0;
+  border: 2px solid var(--t-black);
+}
+.t-screen::-webkit-scrollbar-thumb:hover {
+  background: rgba(74, 222, 128, 0.6);
+}
+
+.t-output {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.t-echo {
+  color: var(--t-green-bright);
+  word-break: break-word;
+}
+.t-prompt {
+  color: var(--t-green-bright);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.t-out {
+  animation: t-fade 0.18s ease;
+}
+@keyframes t-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---- Output text ---- */
+.t-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.t-line {
+  color: var(--t-green);
+  max-width: 100ch;
+  word-break: break-word;
+}
+.t-dim {
+  color: var(--t-green-dim);
+}
+.t-strong {
+  color: var(--t-green-bright);
+  font-weight: 600;
+}
+
+/* clickable command / link — plain green text */
+.t-cmd {
+  font-family: var(--mono);
+  font-size: inherit;
+  color: var(--t-green-bright);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+.t-cmd:hover {
+  border-bottom-color: var(--t-green-bright);
+}
+
+/* ---- Lists ---- */
+.t-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.t-list-row {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+}
+.t-list-row .t-cmd {
+  min-width: 8rem;
+  text-align: left;
+  flex: none;
+}
+
+/* tight sentence lines (aboutme, contact details) */
+.t-lines {
+  display: flex;
+  flex-direction: column;
+}
+
+/* heading-then-detail groups (experience, stack) */
+.t-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.t-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* rated rows (skills, grades) — name ... dotted leader ... score */
+.t-rate-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.t-rate-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+.t-rate-name {
+  flex: none;
+  color: var(--t-green);
+}
+.t-rate-dots {
+  flex: 1;
+  min-width: 1.5rem;
+  border-bottom: 1px dotted rgba(74, 222, 128, 0.28);
+  margin-bottom: 0.32rem;
+}
+.t-rate-score {
+  flex: none;
+  color: var(--t-green-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+/* project entries */
+.t-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.t-proj {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+/* bullet lists (project focus areas, roadmap, currently) */
+.t-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+}
+.t-bullets li {
+  list-style: none;
+}
+
+/* roadmap status glyphs */
+.t-glyph {
+  display: inline-block;
+  width: 1.1em;
+  text-align: center;
+}
+.t-glyph-done {
+  color: var(--t-green-bright);
+}
+.t-glyph-progress {
+  color: var(--t-green);
+}
+.t-glyph-planned {
+  color: var(--t-green-dim);
+}
+
+/* `all` — stacked sections */
+.t-all {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.t-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* ---- Input ---- */
+.t-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.t-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--t-green-bright);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  caret-color: var(--t-green);
+  padding: 0;
+}
+
+@media (max-width: 600px) {
+  .t-list-row {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+  .t-titlebar-text {
+    display: none;
+  }
+}

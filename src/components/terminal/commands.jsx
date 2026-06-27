@@ -462,7 +462,7 @@ export function renderHelp(ctx) {
       <ul className="t-list">
         {HELP_ORDER.map((name) => (
           <li className="t-list-row" key={name}>
-            <Cmd sub={name} ctx={ctx}>
+            <Cmd sub={name} ctx={ctx} raw={name === "clear"}>
               {name}
             </Cmd>
             <span className="t-dim">

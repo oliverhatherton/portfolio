@@ -56,7 +56,13 @@ export default function Terminal() {
       const bin = tokens[0].toLowerCase();
       const sub = (tokens[1] || "").toLowerCase();
 
-      // Everything must be `portfolio <command>`.
+      // `clear` works standalone too, like a real terminal.
+      if (bin === "clear") {
+        clearScreenRef.current();
+        return;
+      }
+
+      // Everything else must be `portfolio <command>`.
       if (bin !== "portfolio") {
         const maybe = resolveSub(bin) ? bin : null;
         append([
@@ -155,12 +161,29 @@ export default function Terminal() {
   // again (without typing) advances to the next one, wrapping around.
   const complete = () => {
     const raw = input.replace(/^\s+/, "");
-    if (!raw) {
-      setInput("portfolio ");
-      return;
-    }
+
     if (!raw.includes(" ")) {
-      if ("portfolio".startsWith(raw.toLowerCase())) setInput("portfolio ");
+      // Completing the first word: either "portfolio" or the standalone
+      // "clear" command, cycling between them like the sub-level completion.
+      const state = tabRef.current;
+      const continuingCycle =
+        state.matches.length > 0 && state.matches[state.idx] === raw;
+
+      let matches = state.matches;
+      let idx = state.idx;
+
+      if (!continuingCycle) {
+        matches = ["portfolio", "clear"].filter((n) =>
+          n.startsWith(raw.toLowerCase()),
+        );
+        idx = 0;
+      } else {
+        idx = (idx + 1) % matches.length;
+      }
+
+      if (!matches.length) return;
+      tabRef.current = { matches, idx };
+      setInput(matches[idx] === "clear" ? "clear" : "portfolio ");
       return;
     }
 

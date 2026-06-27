@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./terminal.css";
 import { resolveSub, renderHelp, subNames } from "./commands.jsx";
+import useWindowManager from "../../hooks/useWindowManager";
+import WindowManager from "../windows/WindowManager";
 
 const PROMPT = "~ %";
 const HELP_WORDS = ["", "--help", "-h", "help", "?"];
@@ -21,6 +23,14 @@ export default function Terminal() {
   // without relying on textual hoisting.
   const runRef = useRef(() => {});
   const clearScreenRef = useRef(() => {});
+
+  const {
+    windows,
+    open: openWindow,
+    close: closeWindow,
+    move: moveWindow,
+    focus: focusWindow,
+  } = useWindowManager();
 
   const entry = useCallback(
     (node) => ({ id: idRef.current++, type: "output", node }),
@@ -113,10 +123,10 @@ export default function Terminal() {
         return;
       }
 
-      const node = def.run({ run: runRef.current });
+      const node = def.run({ run: runRef.current, openWindow });
       if (node != null) append([entry(node)]);
     },
-    [append, entry],
+    [append, entry, openWindow],
   );
   useEffect(() => {
     runRef.current = run;
@@ -269,6 +279,13 @@ export default function Terminal() {
           </div>
         </main>
       </div>
+
+      <WindowManager
+        windows={windows}
+        onClose={closeWindow}
+        onMove={moveWindow}
+        onFocus={focusWindow}
+      />
     </div>
   );
 }

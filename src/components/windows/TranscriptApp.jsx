@@ -1,7 +1,7 @@
 export default function TranscriptApp({ classification, modules, note }) {
   return (
     <div className="app-doc">
-      <div className="app-doc-toolbar">transcript.docx</div>
+      <div className="app-doc-toolbar">Grades</div>
       <div className="app-doc-page">
         <h1 className="app-doc-h1">Academic Transcript</h1>
         <p className="app-doc-sub">{classification}</p>

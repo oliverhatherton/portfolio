@@ -1,29 +1,29 @@
 export const bioParagraphs = [
-  "It started on a second-hand MacBook running Minecraft at about 45fps which got me hooked on how software worked. I the got my first coding book at ten and never really stopped. Computer Science at school, GCSE and A-Level Computer Science, and now a BSc in Software Engineering at the University of Huddersfield, on track for First-Class Honours. I didn't fall into this field; I kept choosing it.",
-  "What pulled me in is the mix of art and engineering, there are always a dozen ways to solve a problem, and finding the elegant one is the fun part. I care most about understanding things properly: how a system behaves under load, why a design decision was made, what happens when the network drops a packet. Surface-level knowledge has never sat well with me.",
-  "I joined Babcock International in Bristol as a Year in Industry Software Engineer, and it's where I found my love for backend work. My first project was a monitoring and configuration platform for specialist hardware, handed to me a codebase using Rust, Tokio and Tauri. Having never written a line of Rust, a couple of months of deliberate daily learning later I was shipping features and fixing defects in it. My second project moved me onto command-and-control software for radio equipment in Java and Vue, where I've since been contributing effectively completing 11 tickets comprised of user stories, tech debt and bugs just over 3 months.",
-  "Outside of work I build things to understand them properly. Currently I'm working on my Order Lifecycle Application, currently I'm working on just the backend which is NestJS reference backend that models an order's full life as an event-driven workflow over RabbitMQ: idempotent consumers, dead-letter queues, the dual-write problem, recovery from partial failure. It's less a product and more a worked example of the patterns a real distributed system needs.",
-  "Away from a keyboard I'm a McLaren F1 die-hard, lights out on a Sunday and you won't get much out of me. I'm also into motorsport more broadly (WEC, IMSA, GTWC), a bit of sim racing and gaming, and there's pretty much always music on while I build. I'm looking for a graduate backend role from mid-2027, somewhere I can take on difficult problems and be trusted to either know the answer or go and find it.",
+  "It started on a second-hand MacBook running Minecraft at about 45fps, which got me hooked on how software actually worked. I got my first coding book at ten and never really stopped: IT and Computer Science at school through GCSE and A-Level, and now a BSc in Software Engineering at the University of Huddersfield, on track for First-Class Honours. I didn't fall into this field; I kept choosing it.",
+  "What pulled me in is the mix of art and engineering. There are always a dozen ways to solve a problem, and finding the elegant one is the fun part. I care most about understanding things properly: how a system behaves under load, why a design decision was made, what happens when the network drops a packet. Surface-level knowledge has never sat well with me.",
+  "I joined Babcock International in Bristol as a Year in Industry Software Engineer, and it's where I found my love for backend work. My first project was a monitoring and configuration platform for specialist hardware, handed to me as a Rust, Tokio and Tauri codebase. Having never written a line of Rust, a couple of months of deliberate daily learning later I was shipping features and fixing defects in it. My second project moved me onto command and control software for radio equipment in Java and Vue, where over my first three months I shipped 11 tickets spanning user stories, technical debt and bug fixes.",
+  "Outside of work I build things to understand them properly. Right now that's the Order Lifecycle Application, a NestJS backend that models an order's full life as an event-driven workflow over RabbitMQ: idempotent consumers, dead-letter queues, the dual-write problem and recovery from partial failure. It's less a product and more a worked example of the patterns a real distributed system needs.",
+  "Away from a keyboard I'm a McLaren F1 die-hard. Lights out on a Sunday and you won't get much out of me. I'm into motorsport more broadly (WEC, IMSA, GTWC), a bit of sim racing and gaming, and there's pretty much always music on while I build. I'm looking for a graduate backend role from mid-2027, somewhere I can take on difficult problems and be trusted to either know the answer or go and find it.",
 ];
 
 export const experience = [
   {
     title: "Babcock International",
     subtitle:
-      "Year in Industry Software Engineer · Bristol - monitoring & configuration platform (Rust, Tokio, Tauri), then command & control software for radio equipment (Java, Vue)",
-    meta: "2025 - 26",
+      "Year in Industry Software Engineer, Bristol. Monitoring and configuration platform (Rust, Tokio, Tauri), then command and control software for radio equipment (Java, Vue).",
+    meta: "2025 to 2026",
   },
   {
     title: "Babcock Internal Hackathon",
     subtitle:
-      "Backend Lead, 3 months into placement · convoy management platform - finished runner-up, one team member short of every other team",
+      "Backend lead, three months into placement. Built a convoy management platform and finished runner-up, a team member short of every other team.",
     meta: "2025",
   },
   {
     title: "University of Huddersfield",
     subtitle:
-      "BSc (Hons) Software Engineering · on track for a First - 91% Operating Systems, 81% Software Design & Development, 79% Computer Architecture",
-    meta: "2023 - 27",
+      "BSc (Hons) Software Engineering, on track for a First. Top marks include 91% Operating Systems, 81% Software Design and Development, 79% Computer Architecture.",
+    meta: "2023 to 2027",
   },
 ];
 
@@ -39,7 +39,7 @@ export const skills = [
       "REST APIs",
       "NestJS",
       "PostgreSQL",
-      "Auth & authorization",
+      "Auth and authorization",
       "RabbitMQ",
       "Spring Boot",
       "System design",
@@ -59,58 +59,91 @@ export const grades = {
   classification: "On track for First-Class Honours",
   modules: [
     { name: "Operating Systems", mark: "91%" },
-    { name: "Software Design & Development", mark: "81%" },
-    { name: "Computer Organisation & Architecture", mark: "79%" },
+    { name: "Software Design and Development", mark: "81%" },
+    { name: "Computer Organisation and Architecture", mark: "79%" },
     { name: "Computer Networks", mark: "76%" },
     { name: "Object-Oriented Systems Development", mark: "73%" },
     { name: "Artificial Intelligence", mark: "71%" },
     { name: "Relational Databases", mark: "70%" },
   ],
-  note: "Also a podium finish at Huddersfield's internal hackathon.",
+  note: "Plus a podium finish at Huddersfield's internal hackathon.",
 };
 
 export const achievements = [
   {
-    title: "rapid technology adoption",
+    title: "Rapid technology adoption",
     detail:
-      "Went from zero Rust experience to shipping production code in Rust, Tokio and Tauri on my first project. By my second, on Java and Vue, I was contributing to a new sprint completely unassisted within 3 days of joining.",
+      "Went from zero Rust experience to shipping production code in Rust, Tokio and Tauri on my first project. By my second, on Java and Vue, I was contributing to a new sprint completely unassisted within three days of joining.",
   },
   {
-    title: "technical debt refactor",
+    title: "Technical debt refactor",
     detail:
-      "Led a refactor that consolidated 16 duplicated endpoints into 8 reusable ones: found the duplication, designed the consolidated solution, repaired the integration and unit tests it broke, and made the surface area easier to maintain.",
+      "Led a refactor that consolidated 16 duplicated endpoints into 8 reusable ones. I found the duplication, designed the consolidated solution, repaired the integration and unit tests it broke, and left the surface area easier to maintain.",
   },
   {
-    title: "hackathon leadership",
+    title: "Hackathon leadership",
     detail:
-      "Led backend development at a Babcock internal hackathon just three months into placement. Our team was one team member short of every other team, and we had a teammate who'd started coding only three months earlier who required pair programming to be able to contribute. Finished runner-up.",
+      "Led backend development at a Babcock internal hackathon three months into placement. We were a team member short of every other team, and I pair-programmed with a teammate who had started coding only three months earlier so he could contribute. We finished runner-up.",
   },
 ];
 
 export const interests = [
-  "Formula 1 - McLaren, papaya through and through",
-  "Motorsport more broadly: WEC, WRC, IMSA, GT World Challenge",
-  "Cars and automotive engineering",
-  "Music - there's pretty much always something playing while I build",
-  "Go-karting",
-  "Chess",
-  "GeoGuessr",
-  "Competitive gaming",
+  {
+    title: "Formula 1",
+    detail: "McLaren, papaya through and through.",
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/2024_McLaren_MCL38.jpg/960px-2024_McLaren_MCL38.jpg",
+  },
+  {
+    title: "Motorsport",
+    detail: "WEC, WRC, IMSA and GT World Challenge. I will watch anything with a grid.",
+    image: "racing,car",
+  },
+  {
+    title: "Cars",
+    detail: "JDM at heart. The Lancer Evo VI Tommi Makinen Edition is the dream.",
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Mitsubishi_Lancer_Evolution_VI_Sideview.jpg/960px-Mitsubishi_Lancer_Evolution_VI_Sideview.jpg",
+  },
+  {
+    title: "Music",
+    detail: "Pretty much always something playing while I build, Pink Floyd more than most.",
+    src: "https://upload.wikimedia.org/wikipedia/en/3/3b/Dark_Side_of_the_Moon.png",
+  },
+  {
+    title: "Go-karting",
+    detail: "The closest most of us get to a real lights-out race start.",
+    image: "kart",
+  },
+  {
+    title: "Chess",
+    detail: "Slow games, sharp endgames and the occasional honest blunder.",
+    image: "chess",
+  },
+  {
+    title: "GeoGuessr",
+    detail: "Dropped on a random street with one job: work out where on earth I am.",
+    image: "street,city",
+  },
 ];
 
 export const values = ["curiosity", "integrity", "ownership", "growth", "family", "stability"];
 
 export const currently = {
   workingOn: ["Order Lifecycle Application"],
-  learning: ["System design through building the Order Lifecycle Application"],
+  learning: ["System design, through building the Order Lifecycle Application"],
   // "watching" is computed live in the terminal component from the F1 API.
-  lookingFor: ["graduate backend opportunities (2027)"],
+  lookingFor: ["Graduate backend opportunities (2027)"],
 };
 
 export const projects = [
   {
     name: "order-lifecycle-backend",
-    tagline: "A production-shaped backend exploring the hard parts of distributed systems.",
+    title: "Order Lifecycle Application",
+    tag: "Distributed systems",
+    date: "In progress, 2025",
+    excerpt:
+      "A production-shaped backend that models the full life of an order as an event-driven workflow.",
+    tagline:
+      "A production-shaped backend exploring the hard parts of distributed systems.",
     flow: "placed → reserved → paid → completed / failed",
     focus: [
       "Event-driven workflows over RabbitMQ",
@@ -123,11 +156,29 @@ export const projects = [
     ],
     stack: ["NestJS", "TypeScript", "PostgreSQL", "RabbitMQ", "JWT", "Docker", "Testcontainers"],
     roadmap: [
-      { label: "Identity & Access", status: "done" },
-      { label: "Order Core Domain", status: "done" },
-      { label: "Event-Driven Fulfilment", status: "progress" },
-      { label: "Redis Caching", status: "planned" },
-      { label: "Observability & Tracing", status: "planned" },
+      { label: "Identity and access", status: "done" },
+      { label: "Order core domain", status: "done" },
+      { label: "Event-driven fulfilment", status: "progress" },
+      { label: "Redis caching", status: "planned" },
+      { label: "Observability and tracing", status: "planned" },
     ],
+  },
+  {
+    name: "interactive-portfolio",
+    title: "This portfolio",
+    tag: "Frontend",
+    date: "2025",
+    excerpt:
+      "A portfolio built as a usable command line, where every section opens as its own little desktop app.",
+    tagline:
+      "The site you're reading now: a terminal you can actually type into, with draggable desktop apps for each section.",
+    focus: [
+      "Command parser with history and tab completion",
+      "A draggable, single-instance window manager",
+      "A distinct fake app for every section",
+      "Live F1 schedule lookup for the currently page",
+      "Graceful fallback to plain output on mobile",
+    ],
+    stack: ["React", "Vite", "Plain CSS"],
   },
 ];

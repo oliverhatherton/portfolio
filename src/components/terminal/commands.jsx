@@ -27,13 +27,14 @@ const CONTACT_COPY =
 
 /* Tries to open the section's desktop app window; if that's not available
    (mobile, or window manager declined) renders the plain terminal output
-   instead. Keeps every section's text-only fallback fully intact. */
+   instead. The window title and the "opened" message always use the command
+   name, so they stay consistent with what you typed. */
 function openOrInline(ctx, id, windowConfig, inlineNode) {
-  const opened = ctx?.openWindow?.(id, windowConfig);
+  const opened = ctx?.openWindow?.(id, { ...windowConfig, title: id });
   if (opened) {
     return (
       <p className="t-line">
-        → opened <span className="t-strong">{windowConfig.title}</span>
+        → opened <span className="t-strong">{id}</span>
       </p>
     );
   }
@@ -50,7 +51,6 @@ export const subcommands = {
         ctx,
         "about",
         {
-          title: "about.txt",
           app: "notes",
           props: { paragraphs: bioParagraphs },
           width: 420,
@@ -75,11 +75,10 @@ export const subcommands = {
         ctx,
         "currently",
         {
-          title: "Today",
           app: "dashboard",
           props: { currently },
-          width: 380,
-          height: 460,
+          width: 520,
+          height: 560,
         },
         <div className="t-groups">
           {CURRENTLY_SECTIONS.map(({ key, label }) => (
@@ -110,7 +109,6 @@ export const subcommands = {
         ctx,
         "experience",
         {
-          title: "experience.log",
           app: "timeline",
           props: { items: experience },
           width: 460,
@@ -137,7 +135,6 @@ export const subcommands = {
         ctx,
         "grades",
         {
-          title: "Transcript.app",
           app: "transcript",
           props: grades,
           width: 420,
@@ -167,7 +164,6 @@ export const subcommands = {
         ctx,
         "skills",
         {
-          title: "Skills.app",
           app: "skills",
           props: { groups: skills },
           width: 480,
@@ -192,7 +188,6 @@ export const subcommands = {
         ctx,
         "achievements",
         {
-          title: "achievements",
           app: "trophy",
           props: { achievements },
           width: 440,
@@ -217,18 +212,17 @@ export const subcommands = {
         ctx,
         "projects",
         {
-          title: "blog",
           app: "blog",
-          props: { project: dataProjects[0] },
-          width: 520,
-          height: 560,
+          props: { posts: dataProjects },
+          width: 540,
+          height: 580,
         },
         <div className="t-projects">
           {dataProjects.map((p) => (
             <div className="t-proj" key={p.name}>
-              <p className="t-line t-strong">{p.name}</p>
+              <p className="t-line t-strong">{p.title}</p>
               <p className="t-line t-dim">{p.tagline}</p>
-              <p className="t-line">{p.flow}</p>
+              {p.flow ? <p className="t-line">{p.flow}</p> : null}
 
               <p className="t-line t-strong">focus areas</p>
               <ul className="t-bullets">
@@ -242,17 +236,21 @@ export const subcommands = {
               <p className="t-line t-strong">stack</p>
               <p className="t-line t-dim">{p.stack.join(", ")}</p>
 
-              <p className="t-line t-strong">roadmap</p>
-              <ul className="t-bullets">
-                {p.roadmap.map((r) => (
-                  <li className="t-line" key={r.label}>
-                    <span className={`t-glyph t-glyph-${r.status}`}>
-                      {ROADMAP_GLYPH[r.status]}
-                    </span>{" "}
-                    {r.label}
-                  </li>
-                ))}
-              </ul>
+              {p.roadmap ? (
+                <>
+                  <p className="t-line t-strong">roadmap</p>
+                  <ul className="t-bullets">
+                    {p.roadmap.map((r) => (
+                      <li className="t-line" key={r.label}>
+                        <span className={`t-glyph t-glyph-${r.status}`}>
+                          {ROADMAP_GLYPH[r.status]}
+                        </span>{" "}
+                        {r.label}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : null}
             </div>
           ))}
         </div>,
@@ -267,17 +265,17 @@ export const subcommands = {
         ctx,
         "interests",
         {
-          title: "diary",
           app: "gallery",
           props: { interests },
-          width: 420,
-          height: 420,
+          width: 580,
+          height: 600,
         },
-        <div className="t-lines">
-          {interests.map((line, i) => (
-            <p className="t-line" key={i}>
-              {line}
-            </p>
+        <div className="t-groups">
+          {interests.map((item) => (
+            <div className="t-group" key={item.title}>
+              <p className="t-line t-strong">{item.title}</p>
+              <p className="t-line t-dim">{item.detail}</p>
+            </div>
           ))}
         </div>,
       ),
@@ -291,7 +289,6 @@ export const subcommands = {
         ctx,
         "contact",
         {
-          title: "contact.vcf",
           app: "contact",
           props: {
             name: profile.name,
@@ -336,16 +333,16 @@ export const subcommands = {
     aliases: ["resume"],
     run: (ctx) => {
       const opened = ctx?.openWindow?.("cv", {
-        title: "cv.pdf",
+        title: "cv",
         app: "pdf",
         props: { href: profile.cvHref, title: "Oliver-Atherton-CV.pdf" },
-        width: 460,
-        height: 600,
+        width: 540,
+        height: 720,
       });
       if (opened) {
         return (
           <p className="t-line">
-            → opened <span className="t-strong">cv.pdf</span>
+            → opened <span className="t-strong">cv</span>
           </p>
         );
       }
@@ -372,7 +369,7 @@ export const subcommands = {
     desc: "output everything at once",
     run: (ctx) => {
       const opened = ctx?.openWindow?.("all", {
-        title: "portfolio.pdf",
+        title: "all",
         app: "all",
         props: {
           data: {
@@ -382,7 +379,7 @@ export const subcommands = {
             achievements,
             grades,
             skills,
-            project: dataProjects[0],
+            projects: dataProjects,
             currently,
             interests,
             contact: {
@@ -398,7 +395,7 @@ export const subcommands = {
       if (opened) {
         return (
           <p className="t-line">
-            → opened <span className="t-strong">portfolio.pdf</span>
+            → opened <span className="t-strong">all</span>
           </p>
         );
       }
@@ -427,10 +424,10 @@ export const subcommands = {
 const ALL_ORDER = [
   "about",
   "experience",
+  "projects",
+  "skills",
   "achievements",
   "grades",
-  "skills",
-  "projects",
   "currently",
   "interests",
   "contact",
@@ -440,10 +437,10 @@ const ALL_ORDER = [
 const HELP_ORDER = [
   "about",
   "experience",
+  "projects",
+  "skills",
   "achievements",
   "grades",
-  "skills",
-  "projects",
   "currently",
   "interests",
   "contact",
@@ -451,7 +448,9 @@ const HELP_ORDER = [
   "all",
   "clear",
 ];
-const EXTRA_DESC = { clear: "clear the screen" };
+/* Commands that take the `portfolio` prefix, in display order. `clear` is a
+   standalone command and is shown separately below. */
+const MENU = HELP_ORDER.filter((n) => n !== "clear");
 
 export function renderHelp(ctx) {
   return (
@@ -460,17 +459,19 @@ export function renderHelp(ctx) {
         usage: <span className="t-strong">portfolio &lt;command&gt;</span>
       </p>
       <ul className="t-list">
-        {HELP_ORDER.map((name) => (
+        {MENU.map((name) => (
           <li className="t-list-row" key={name}>
-            <Cmd sub={name} ctx={ctx} raw={name === "clear"}>
+            <Cmd sub={name} ctx={ctx}>
               {name}
             </Cmd>
-            <span className="t-dim">
-              {subcommands[name]?.desc ?? EXTRA_DESC[name]}
-            </span>
+            <span className="t-dim">{subcommands[name]?.desc}</span>
           </li>
         ))}
       </ul>
+      <p className="t-line t-dim">
+        and <Cmd sub="clear" ctx={ctx} raw>clear</Cmd> on its own (no portfolio
+        prefix) to clear the screen
+      </p>
       <p className="t-line t-dim">↑/↓ history · Tab autocomplete</p>
     </div>
   );

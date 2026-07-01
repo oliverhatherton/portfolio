@@ -684,6 +684,13 @@
   font-size: 0.72rem;
   color: #9ca3af;
 }
+.app-post-live {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #16a34a;
+}
 .app-post-title {
   font-size: 1.2rem;
   font-weight: 800;
@@ -738,8 +745,19 @@
   font-size: 0.98rem;
   line-height: 1.6;
   color: #4b5563;
-  padding-bottom: 1.1rem;
-  border-bottom: 1px solid #eee;
+}
+.app-article-visit {
+  display: inline-block;
+  margin: 0.9rem 0 0.2rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+  background: #16a34a;
+  border-radius: 8px;
+  padding: 0.5rem 0.9rem;
+}
+.app-article-visit:hover {
+  background: #15803d;
 }
 .app-article-flow {
   display: flex;
@@ -1035,72 +1053,72 @@
   margin-top: 0.15rem;
 }
 
-/* ===== Moodboard (interests) ===== */
-.app-mood {
+/* ===== Interests (clean icon list) ===== */
+.app-hobbies {
   min-height: 100%;
-  display: flex;
-  flex-direction: column;
   background: #fff;
 }
-.app-mood-head {
-  padding: 0.95rem 1.1rem 0.45rem;
+.app-hobbies-head {
+  padding: 1.1rem 1.25rem 0.5rem;
 }
-.app-mood-kicker {
-  font-size: 0.95rem;
+.app-hobbies-title {
+  font-size: 1.05rem;
   font-weight: 700;
   color: #111827;
 }
-.app-mood-sub {
-  font-size: 0.76rem;
+.app-hobbies-sub {
+  font-size: 0.78rem;
   color: #6b7280;
-  margin-top: 0.12rem;
+  margin-top: 0.15rem;
 }
-.app-mood-grid {
-  padding: 0.7rem 1rem 1.2rem;
+.app-hobbies-grid {
+  margin: 0;
+  padding: 0.6rem 1.25rem 1.3rem;
+  list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.9rem;
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
 }
-.app-mood-card {
+.app-hobby {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.7rem 0.55rem;
+  border-radius: 10px;
+  transition: background 0.15s ease;
+}
+.app-hobby:hover {
+  background: #f6f7f8;
+}
+.app-hobby-icon {
+  flex: none;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #16a34a;
+  background: #e9f6ee;
+}
+.app-hobby-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.app-hobby-text {
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #f6f7f8;
-  border: 1px solid #ececec;
+  gap: 0.1rem;
 }
-.app-mood-photo {
-  aspect-ratio: 3 / 2;
-  background: #e5e7eb;
-  overflow: hidden;
-}
-.app-mood-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-/* logos sit contained on a clean white tile rather than cropped */
-.app-mood-photo.is-contain {
-  background: #fff;
-}
-.app-mood-photo.is-contain img {
-  object-fit: contain;
-  padding: 14%;
-}
-.app-mood-meta {
-  padding: 0.6rem 0.7rem 0.75rem;
-}
-.app-mood-title {
-  font-size: 0.86rem;
-  font-weight: 700;
+.app-hobby-name {
+  font-size: 0.9rem;
+  font-weight: 600;
   color: #111827;
 }
-.app-mood-detail {
-  font-size: 0.74rem;
+.app-hobby-detail {
+  font-size: 0.78rem;
   color: #6b7280;
   line-height: 1.4;
-  margin-top: 0.18rem;
 }
 
 /* ===== Contact card ===== */

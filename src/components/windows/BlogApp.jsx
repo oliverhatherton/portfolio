@@ -20,6 +20,17 @@ function PostFull({ post, onBack }) {
         <h1 className="app-article-title">{post.title}</h1>
         <p className="app-article-lead">{post.tagline}</p>
 
+        {post.href ? (
+          <a
+            className="app-article-visit"
+            href={post.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Visit the live project ↗
+          </a>
+        ) : null}
+
         {post.flow ? (
           <div className="app-article-flow">
             <span className="app-article-flow-label">Lifecycle</span>
@@ -92,6 +103,7 @@ export default function BlogApp({ posts }) {
             <div className="app-post-head">
               <span className="app-post-tag">{post.tag}</span>
               <span className="app-post-date">{post.date}</span>
+              {post.href ? <span className="app-post-live">● Live</span> : null}
             </div>
             <h2 className="app-post-title">{post.title}</h2>
             <p className="app-post-excerpt">{post.excerpt}</p>

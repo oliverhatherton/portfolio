@@ -1,16 +1,46 @@
-# React + Vite
+# Portfolio — Interactive Terminal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Source for [oliverhatherton.com](https://oliverhatherton.com): a personal
+portfolio rebuilt as a black-and-green, mac-windowed terminal you navigate
+with `portfolio <command>` instead of scrolling a marketing-style page.
 
-Currently, two official plugins are available:
+## Commands
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| Command | Aliases | Shows |
+| --- | --- | --- |
+| `about` | `bio`, `whoami`, `me`, `intro` | who I am |
+| `currently` | `now` | what I'm working on / learning / watching right now |
+| `experience` | `work`, `timeline`, `jobs` | work history |
+| `grades` | `academics`, `marks`, `results` | degree results |
+| `skills` | `stack`, `tools`, `tech` | technical skills |
+| `achievements` | `wins`, `highlights` | notable wins |
+| `projects` | `project`, `flagship`, `build` | featured projects |
+| `interests` | `hobbies` | outside of code |
+| `contact` | `email`, `hire` | how to reach me |
+| `cv` | `resume` | link to my CV |
+| `all` | — | runs every section in sequence |
 
-## React Compiler
+Each command either opens a draggable, resizable desktop-style window
+(`src/components/windows`) or falls back to inline terminal output when a
+window can't be opened (mobile, or the window manager declines).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+React 19 (no compiler) · Vite · plain CSS, no framework — see
+[`docs/style-guide.md`](docs/style-guide.md) for the palette, spacing, and
+component conventions used across the terminal and window components.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Running locally
+
+```bash
+npm install
+npm run dev
+```
+
+`npm run build` outputs to `dist/`; `npm run lint` runs ESLint.
+
+## Deployment
+
+Pushing to `main` triggers [`.github/workflows/deploy-prod-pages.yml`](.github/workflows/deploy-prod-pages.yml),
+which builds the site and publishes `dist/` to the `prod` branch via GitHub
+Pages, served at the custom domain in [`CNAME`](CNAME).

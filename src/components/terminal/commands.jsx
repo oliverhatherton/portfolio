@@ -331,38 +331,7 @@ export const subcommands = {
   cv: {
     desc: "open my CV (PDF)",
     aliases: ["resume"],
-    run: (ctx) => {
-      const opened = ctx?.openWindow?.("cv", {
-        title: "cv",
-        app: "pdf",
-        props: { href: profile.cvHref, title: "Oliver-Atherton-CV.pdf" },
-        width: 540,
-        height: 720,
-      });
-      if (opened) {
-        return (
-          <p className="t-line">
-            → opened <span className="t-strong">cv</span>
-          </p>
-        );
-      }
-
-      if (typeof window !== "undefined") window.open(profile.cvHref, "_blank");
-      return (
-        <p className="t-line">
-          opening Oliver-Atherton-CV.pdf in a new tab… if it didn't open,{" "}
-          <a
-            className="t-cmd"
-            href={profile.cvHref}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            click here
-          </a>
-          .
-        </p>
-      );
-    },
+    run: () => <p className="t-line">cv — coming soon.</p>,
   },
 
   all: {

@@ -160,11 +160,11 @@ export default function Terminal() {
     runRef.current = run;
   });
 
-  // `clear` resets the screen with a returning-user greeting + the help list.
+  // `clear` empties the screen, leaving just the prompt, like a real terminal.
   const clearScreen = useCallback(() => {
     setActive(null);
-    setLines([entry(<WelcomeBack />), entry(renderHelp({ run: runRef.current }))]);
-  }, [entry]);
+    setLines([]);
+  }, []);
   useEffect(() => {
     clearScreenRef.current = clearScreen;
   });
@@ -443,17 +443,6 @@ function Banner({ run, first = false }) {
           <span className="t-strong">portfolio --help</span> for every command
         </p>
       ) : null}
-    </div>
-  );
-}
-
-function WelcomeBack() {
-  return (
-    <div className="t-block">
-      <p className="t-line">Welcome back.</p>
-      <p className="t-line t-dim">
-        Screen's clear, <span className="t-strong">portfolio --help</span> if you need the list again.
-      </p>
     </div>
   );
 }

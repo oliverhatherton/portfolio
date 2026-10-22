@@ -1,6 +1,7 @@
 export const profile = {
   name: "Oliver Atherton",
   email: "oliverhatherton@gmail.com",
+  cvHref: "/Oliver-Atherton-CV.pdf",
 };
 
 export const socials = [

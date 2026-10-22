@@ -55,16 +55,41 @@ export const skills = [
   },
 ];
 
+/* Module marks per year, from the official results; highest first in each year. */
 export const grades = {
   classification: "On track for First-Class Honours",
-  modules: [
-    { name: "Operating Systems", mark: "91%" },
-    { name: "Software Design and Development", mark: "81%" },
-    { name: "Computer Organisation and Architecture", mark: "79%" },
-    { name: "Computer Networks", mark: "76%" },
-    { name: "Object-Oriented Systems Development", mark: "73%" },
-    { name: "Artificial Intelligence", mark: "71%" },
-    { name: "Relational Databases", mark: "70%" },
+  years: [
+    {
+      label: "Year 1",
+      session: "2023/24",
+      modules: [
+        { name: "Software Design and Development", mark: "81%" },
+        { name: "Computer Organisation and Architecture", mark: "79%" },
+        { name: "Computer Network Fundamentals", mark: "76%" },
+        { name: "Computing Science and Mathematics", mark: "71%" },
+        { name: "Project 1", mark: "65%" },
+      ],
+    },
+    {
+      label: "Year 2",
+      session: "2024/25",
+      modules: [
+        { name: "Operating Systems", mark: "91%" },
+        { name: "Object-Oriented Systems Development", mark: "73%" },
+        { name: "Introduction to Artificial Intelligence", mark: "71%" },
+        { name: "Relational Databases and Web Integration", mark: "70%" },
+        { name: "Algorithms and Data Structures", mark: "66%" },
+        { name: "Team Project", mark: "60%" },
+      ],
+    },
+    {
+      label: "Placement",
+      session: "2025/26",
+      modules: [
+        { name: "Personal Social and Technical Skills", mark: "100%" },
+        { name: "Self-Assessment Skills", mark: "60%" },
+      ],
+    },
   ],
   note: "Plus a podium finish at Huddersfield's internal hackathon.",
 };

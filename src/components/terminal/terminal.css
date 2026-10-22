@@ -269,7 +269,9 @@
   gap: 0.6rem;
 }
 .t-rate-name {
-  flex: none;
+  /* long module names wrap rather than pushing the mark off screen */
+  flex: 0 1 auto;
+  min-width: 0;
   color: var(--t-green);
 }
 .t-rate-dots {

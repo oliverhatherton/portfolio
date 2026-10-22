@@ -96,14 +96,21 @@ export default function AllApp({ data }) {
           <section className="app-all-section">
             <h2>Grades</h2>
             <p className="app-all-p">{grades.classification}</p>
-            <div className="app-all-table">
-              {grades.modules.map((m) => (
-                <div className="app-all-row" key={m.name}>
-                  <span>{m.name}</span>
-                  <strong>{m.mark}</strong>
+            {grades.years.map((year) => (
+              <div key={year.label}>
+                <p className="app-all-item-title">
+                  {year.label} · {year.session}
+                </p>
+                <div className="app-all-table">
+                  {year.modules.map((m) => (
+                    <div className="app-all-row" key={m.name}>
+                      <span>{m.name}</span>
+                      <strong>{m.mark}</strong>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
             <p className="app-all-muted">{grades.note}</p>
           </section>
 

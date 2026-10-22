@@ -1,4 +1,4 @@
-export default function TranscriptApp({ classification, modules, note }) {
+export default function TranscriptApp({ classification, years, note }) {
   return (
     <div className="app-doc">
       <div className="app-doc-toolbar">Grades</div>
@@ -12,14 +12,21 @@ export default function TranscriptApp({ classification, modules, note }) {
               <th>Mark</th>
             </tr>
           </thead>
-          <tbody>
-            {modules.map((m) => (
-              <tr key={m.name}>
-                <td>{m.name}</td>
-                <td>{m.mark}</td>
+          {years.map((year) => (
+            <tbody key={year.label}>
+              <tr className="app-doc-year">
+                <th colSpan={2}>
+                  {year.label} <span>{year.session}</span>
+                </th>
               </tr>
-            ))}
-          </tbody>
+              {year.modules.map((m) => (
+                <tr key={m.name}>
+                  <td>{m.name}</td>
+                  <td>{m.mark}</td>
+                </tr>
+              ))}
+            </tbody>
+          ))}
         </table>
         <p className="app-doc-footnote">{note}</p>
       </div>

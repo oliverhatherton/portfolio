@@ -241,6 +241,15 @@
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
+.app-doc-table .app-doc-year th {
+  background: #e8eaee;
+  text-align: left;
+}
+.app-doc-year span {
+  font-weight: 400;
+  color: #6b7280;
+  margin-left: 0.4rem;
+}
 .app-doc-footnote {
   margin-top: 0.8rem;
   font-size: 0.78rem;

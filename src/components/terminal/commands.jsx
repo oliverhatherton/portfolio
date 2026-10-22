@@ -137,20 +137,27 @@ export const subcommands = {
         {
           app: "transcript",
           props: grades,
-          width: 420,
-          height: 460,
+          width: 460,
+          height: 640,
         },
         <div className="t-block">
           <p className="t-line t-strong">{grades.classification}</p>
-          <div className="t-rate-list">
-            {grades.modules.map((m) => (
-              <div className="t-rate-row" key={m.name}>
-                <span className="t-rate-name">{m.name}</span>
-                <span className="t-rate-dots" aria-hidden="true" />
-                <span className="t-rate-score">{m.mark}</span>
+          {grades.years.map((year) => (
+            <div className="t-group" key={year.label}>
+              <p className="t-line t-strong">
+                {year.label.toLowerCase()} <span className="t-dim">{year.session}</span>
+              </p>
+              <div className="t-rate-list">
+                {year.modules.map((m) => (
+                  <div className="t-rate-row" key={m.name}>
+                    <span className="t-rate-name">{m.name}</span>
+                    <span className="t-rate-dots" aria-hidden="true" />
+                    <span className="t-rate-score">{m.mark}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
           <p className="t-line t-dim">{grades.note}</p>
         </div>,
       ),

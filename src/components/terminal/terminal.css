@@ -1,7 +1,7 @@
 .terminal {
   --t-green: #4ade80;
   --t-green-bright: #86efac;
-  --t-green-dim: rgba(74, 222, 128, 0.55);
+  --t-green-dim: rgba(74, 222, 128, 0.74);
   --t-black: #050706;
 
   height: 100svh;
@@ -20,10 +20,6 @@
   background: var(--t-black);
   border: 1px solid rgba(74, 222, 128, 0.28);
   border-radius: 12px;
-  box-shadow:
-    0 50px 130px -40px rgba(0, 0, 0, 0.9),
-    0 0 70px -34px rgba(74, 222, 128, 0.28),
-    0 0 0 1px rgba(74, 222, 128, 0.04);
   overflow: hidden;
 }
 
@@ -66,13 +62,14 @@
 
 /* ---- Screen ---- */
 .t-screen {
+  position: relative;
   flex: 1;
   min-height: 0;
   overflow-y: auto;
   padding: clamp(1rem, 3vw, 1.8rem);
   font-family: var(--mono);
-  font-size: 0.9rem;
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.65;
   color: var(--t-green);
   cursor: text;
   scrollbar-width: thin;
@@ -156,6 +153,94 @@
 }
 .t-cmd:hover {
   border-bottom-color: var(--t-green-bright);
+}
+
+/* ---- neofetch intro ---- */
+.t-fetch {
+  display: flex;
+  flex-direction: column;
+}
+.t-fetch-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--t-green-bright);
+}
+.t-fetch-rule {
+  color: var(--t-green-dim);
+  font-size: 1.5rem;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.t-fetch-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.t-fetch-row {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 1rem;
+}
+.t-fetch-row dt {
+  color: var(--t-green-bright);
+  font-weight: 600;
+}
+.t-fetch-row dd {
+  margin: 0;
+  color: var(--t-green);
+}
+.t-fetch-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+}
+
+/* ---- Status bar: a tmux line of section shortcuts ---- */
+.t-statusbar {
+  display: flex;
+  flex: none;
+  align-items: center;
+  padding: 0 0.4rem;
+  background: var(--t-green);
+  color: var(--t-black);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.t-statusbar::-webkit-scrollbar {
+  display: none;
+}
+.t-status-session {
+  flex: none;
+  font-weight: 700;
+  padding: 0 0.6rem 0 0.4rem;
+}
+.t-status-cmd {
+  flex: none;
+  min-height: 2rem;
+  padding: 0 0.6rem;
+  font-family: var(--mono);
+  font-size: inherit;
+  color: var(--t-black);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.t-status-cmd:hover {
+  background: rgba(5, 7, 6, 0.14);
+}
+.t-status-cmd[aria-current="true"] {
+  color: var(--t-green-bright);
+  background: var(--t-black);
+}
+.t-status-cmd:focus-visible {
+  outline-color: var(--t-black);
+  outline-offset: -3px;
 }
 
 /* ---- Lists ---- */
@@ -286,7 +371,7 @@
   outline: none;
   color: var(--t-green-bright);
   font-family: var(--mono);
-  font-size: 0.9rem;
+  font-size: 1rem;
   caret-color: var(--t-green);
   padding: 0;
 }
@@ -298,5 +383,16 @@
   }
   .t-titlebar-text {
     display: none;
+  }
+  .t-statusbar {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+  .t-status-cmd {
+    min-height: 2.5rem;
+  }
+  .t-fetch-row {
+    grid-template-columns: 5.5rem 1fr;
+    gap: 0.6rem;
   }
 }

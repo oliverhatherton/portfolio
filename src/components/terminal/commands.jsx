@@ -492,6 +492,11 @@ export function resolveSub(name) {
   return key ? subcommands[key] : null;
 }
 
+/* canonical command name for an alias (`work` → `experience`), or null. */
+export function resolveName(name) {
+  return SUB_ALIAS[name] || null;
+}
+
 /* names offered by Tab autocomplete (after `portfolio `), kept in help order. */
 export const subNames = [
   ...HELP_ORDER.filter((n) => n !== "clear"),

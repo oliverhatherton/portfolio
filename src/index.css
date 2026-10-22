@@ -9,7 +9,6 @@
 :root {
   --bg: #07090e;
   --fg: #e8edf4;
-  --grid-line: rgba(255, 255, 255, 0.028);
   --green: #4ade80;
   --green-soft: rgba(74, 222, 128, 0.12);
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -37,19 +36,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-}
-
-/* Ambient texture: a single, very subtle static grid. No motion, no glow. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 52px 52px;
-  mask-image: radial-gradient(ellipse 130% 100% at 50% 40%, #000 35%, transparent 90%);
 }
 
 ::selection {

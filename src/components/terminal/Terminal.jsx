@@ -1,22 +1,33 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import "./terminal.css";
-import { resolveSub, renderHelp, subNames } from "./commands.jsx";
+import { resolveSub, resolveName, renderHelp, subNames } from "./commands.jsx";
+import { profile, socials } from "../../data/profile";
 import useWindowManager from "../../hooks/useWindowManager";
 import WindowManager from "../windows/WindowManager";
 
 const PROMPT = "~ %";
 const HELP_WORDS = ["", "--help", "-h", "help", "?"];
+/* Sections pinned to the status bar, so nothing requires typing. */
+const QUICK = ["about", "experience", "projects", "skills", "grades", "contact", "cv"];
+
+// Touch devices: focusing the input pops the keyboard over the content, so
+// only focus it when the visitor taps the prompt itself.
+const isTouch = () =>
+  typeof window !== "undefined" && window.matchMedia?.("(pointer: coarse)").matches;
 
 export default function Terminal() {
   const [lines, setLines] = useState([]);
   const [input, setInput] = useState("");
   const [history, setHistory] = useState([]);
   const [histIdx, setHistIdx] = useState(-1);
+  const [active, setActive] = useState(null);
 
   const idRef = useRef(0);
   const screenRef = useRef(null);
   const inputRef = useRef(null);
   const ranIntro = useRef(false);
+  // The intro is pre-run on load; only scroll once the visitor runs something.
+  const userRan = useRef(false);
   const tabRef = useRef({ matches: [], idx: -1 });
   // `run` and `clearScreen` call each other (retry buttons re-invoke `run`;
   // `run` triggers `clearScreen`). Refs break the circular declaration order
@@ -48,6 +59,7 @@ export default function Terminal() {
         ...prev,
         { id: idRef.current++, type: "prompt", text: cmd },
       ]);
+      userRan.current = true;
       if (!cmd) return;
 
       setHistory((h) => (h[h.length - 1] === cmd ? h : [...h, cmd]));
@@ -59,6 +71,11 @@ export default function Terminal() {
       // `clear` works standalone too, like a real terminal.
       if (bin === "clear") {
         clearScreenRef.current();
+        return;
+      }
+
+      if (bin === "neofetch") {
+        append([entry(<Banner run={runRef.current} repeat />)]);
         return;
       }
 
@@ -129,6 +146,7 @@ export default function Terminal() {
         return;
       }
 
+      setActive(resolveName(sub));
       const node = def.run({ run: runRef.current, openWindow });
       if (node != null) append([entry(node)]);
     },
@@ -140,6 +158,7 @@ export default function Terminal() {
 
   // `clear` resets the screen with a returning-user greeting + the help list.
   const clearScreen = useCallback(() => {
+    setActive(null);
     setLines([entry(<WelcomeBack />), entry(renderHelp({ run: runRef.current }))]);
   }, [entry]);
   useEffect(() => {
@@ -149,12 +168,25 @@ export default function Terminal() {
   useEffect(() => {
     if (ranIntro.current) return;
     ranIntro.current = true;
-    append([entry(<Banner />)]);
+    const runCmd = (cmd) => runRef.current(cmd);
+    const echo = (text) => ({ id: idRef.current++, type: "prompt", text });
+    append([
+      echo("neofetch"),
+      entry(<Banner run={runCmd} />),
+      echo("portfolio --help"),
+      entry(renderHelp({ run: runCmd })),
+    ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Bring the latest command to the top of the screen so its output reads
+  // from the start; short output simply leaves the prompt in view.
   useEffect(() => {
-    screenRef.current?.scrollTo({ top: screenRef.current.scrollHeight });
+    const screen = screenRef.current;
+    const echoes = screen?.querySelectorAll(".t-echo");
+    const last = echoes?.[echoes.length - 1];
+    if (!last || !userRan.current) return;
+    screen.scrollTo({ top: last.offsetTop - 16 });
   }, [lines]);
 
   // Tab cycles through every match for the current fragment; pressing it
@@ -246,7 +278,7 @@ export default function Terminal() {
 
   return (
     <div className="terminal">
-      <div className="t-window">
+      <div className="t-window" data-ui>
         <header className="t-titlebar">
           <span className="t-lights" aria-hidden="true">
             <i /><i /><i />
@@ -257,7 +289,8 @@ export default function Terminal() {
         <main
           className="t-screen"
           ref={screenRef}
-          onClick={() => {
+          onClick={(e) => {
+            if (isTouch() || e.target.closest("a, button")) return;
             // Don't steal focus right after a text selection focusing the input would otherwise collapse it, breaking copy.
             const selection = window.getSelection?.();
             if (selection && selection.toString().length > 0) return;
@@ -297,10 +330,25 @@ export default function Terminal() {
               autoCorrect="off"
               spellCheck="false"
               aria-label="Terminal command input"
-              autoFocus
+              autoFocus={!isTouch()}
             />
           </div>
         </main>
+
+        <nav className="t-statusbar" aria-label="Portfolio sections">
+          <span className="t-status-session" aria-hidden="true">[portfolio]</span>
+          {QUICK.map((name) => (
+            <button
+              type="button"
+              key={name}
+              className="t-status-cmd"
+              aria-current={active === name ? "true" : undefined}
+              onClick={() => run(`portfolio ${name}`)}
+            >
+              {name}
+            </button>
+          ))}
+        </nav>
       </div>
 
       <WindowManager
@@ -313,14 +361,57 @@ export default function Terminal() {
   );
 }
 
-function Banner() {
+/* neofetch-style summary: the recruiter's first questions, answered as CLI output. */
+function Banner({ run, repeat = false }) {
+  // Only the load-time intro is the page's h1.
+  const Title = repeat ? "p" : "h1";
+  const rows = [
+    ["role", "backend software engineer"],
+    ["status", "open to graduate roles from mid\u20112027"],
+    ["degree", "BSc Software Engineering, Huddersfield (on track for a First)"],
+    ["industry", "year in industry at Babcock International (Rust, Java)"],
+  ];
+
   return (
-    <div className="t-block">
-      <p className="t-line">Oliver Atherton - backend-focused software engineer</p>
-      <p className="t-line">
-        try <span className="t-strong">portfolio --help</span> to start
-        navigating
+    <div className="t-fetch">
+      <Title className="t-fetch-title">{profile.name}</Title>
+      <p className="t-fetch-rule" aria-hidden="true">
+        {"-".repeat(profile.name.length)}
       </p>
+      <dl className="t-fetch-rows">
+        {rows.map(([key, value]) => (
+          <div className="t-fetch-row" key={key}>
+            <dt>{key}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+        <div className="t-fetch-row">
+          <dt>cv</dt>
+          <dd className="t-fetch-links">
+            <button type="button" className="t-cmd" onClick={() => run("portfolio cv")}>
+              [view]
+            </button>
+            <a className="t-cmd" href={profile.cvHref} download>
+              [download]
+            </a>
+          </dd>
+        </div>
+        <div className="t-fetch-row">
+          <dt>links</dt>
+          <dd className="t-fetch-links">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                className="t-cmd"
+                href={s.href}
+                {...(s.icon === "mail" ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+              >
+                [{s.label.toLowerCase()}]
+              </a>
+            ))}
+          </dd>
+        </div>
+      </dl>
     </div>
   );
 }

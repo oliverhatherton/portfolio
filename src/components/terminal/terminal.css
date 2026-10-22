@@ -192,6 +192,30 @@
   margin: 0;
   color: var(--t-green);
 }
+/* rows print in quick succession, like real output */
+.t-fetch > *,
+.t-fetch-row {
+  animation: t-print 0.2s ease both;
+  animation-delay: calc(var(--i, 0) * 55ms);
+}
+@keyframes t-print {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+.t-fetch-rows {
+  animation: none;
+}
+.t-fetch-hint {
+  margin-top: 1rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .t-fetch > *,
+  .t-fetch-row {
+    animation: none;
+  }
+}
 .t-fetch-links {
   display: flex;
   flex-wrap: wrap;

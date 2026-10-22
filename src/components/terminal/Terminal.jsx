@@ -28,6 +28,7 @@ export default function Terminal() {
   const ranIntro = useRef(false);
   // The intro is pre-run on load; only scroll once the visitor runs something.
   const userRan = useRef(false);
+  const bannerShown = useRef(false);
   const tabRef = useRef({ matches: [], idx: -1 });
   // `run` and `clearScreen` call each other (retry buttons re-invoke `run`;
   // `run` triggers `clearScreen`). Refs break the circular declaration order
@@ -75,7 +76,9 @@ export default function Terminal() {
       }
 
       if (bin === "neofetch") {
-        append([entry(<Banner run={runRef.current} repeat />)]);
+        const first = !bannerShown.current;
+        bannerShown.current = true;
+        append([entry(<Banner run={runRef.current} first={first} />)]);
         return;
       }
 
@@ -168,15 +171,18 @@ export default function Terminal() {
   useEffect(() => {
     if (ranIntro.current) return;
     ranIntro.current = true;
-    const runCmd = (cmd) => runRef.current(cmd);
-    const echo = (text) => ({ id: idRef.current++, type: "prompt", text });
-    append([
-      echo("neofetch"),
-      entry(<Banner run={runCmd} />),
-      echo("portfolio --help"),
-      entry(renderHelp({ run: runCmd })),
-    ]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Type `neofetch` into the prompt and run it, like a real session.
+    // No cleanup: StrictMode's remount would cancel it and the ref stops a rerun.
+    const cmd = "neofetch";
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const step = reduced ? 0 : 45;
+    for (let i = 1; i <= cmd.length; i += 1) {
+      setTimeout(() => setInput(cmd.slice(0, i)), 250 + step * i);
+    }
+    setTimeout(() => {
+      runRef.current(cmd);
+      setInput("");
+    }, 250 + step * (cmd.length + 3));
   }, []);
 
   // Bring the latest command to the top of the screen so its output reads
@@ -362,9 +368,9 @@ export default function Terminal() {
 }
 
 /* neofetch-style summary: the recruiter's first questions, answered as CLI output. */
-function Banner({ run, repeat = false }) {
-  // Only the load-time intro is the page's h1.
-  const Title = repeat ? "p" : "h1";
+function Banner({ run, first = false }) {
+  // Only the first intro is the page's h1, and only it carries the hint.
+  const Title = first ? "h1" : "p";
   const rows = [
     ["role", "backend software engineer"],
     ["status", "open to graduate roles from mid\u20112027"],
@@ -374,18 +380,20 @@ function Banner({ run, repeat = false }) {
 
   return (
     <div className="t-fetch">
-      <Title className="t-fetch-title">{profile.name}</Title>
-      <p className="t-fetch-rule" aria-hidden="true">
+      <Title className="t-fetch-title" style={{ "--i": 0 }}>
+        {profile.name}
+      </Title>
+      <p className="t-fetch-rule" aria-hidden="true" style={{ "--i": 1 }}>
         {"-".repeat(profile.name.length)}
       </p>
       <dl className="t-fetch-rows">
-        {rows.map(([key, value]) => (
-          <div className="t-fetch-row" key={key}>
+        {rows.map(([key, value], i) => (
+          <div className="t-fetch-row" key={key} style={{ "--i": i + 2 }}>
             <dt>{key}</dt>
             <dd>{value}</dd>
           </div>
         ))}
-        <div className="t-fetch-row">
+        <div className="t-fetch-row" style={{ "--i": 6 }}>
           <dt>cv</dt>
           <dd className="t-fetch-links">
             <button type="button" className="t-cmd" onClick={() => run("portfolio cv")}>
@@ -396,7 +404,7 @@ function Banner({ run, repeat = false }) {
             </a>
           </dd>
         </div>
-        <div className="t-fetch-row">
+        <div className="t-fetch-row" style={{ "--i": 7 }}>
           <dt>links</dt>
           <dd className="t-fetch-links">
             {socials.map((s) => (
@@ -412,6 +420,12 @@ function Banner({ run, repeat = false }) {
           </dd>
         </div>
       </dl>
+      {first ? (
+        <p className="t-line t-dim t-fetch-hint" style={{ "--i": 8 }}>
+          pick a section below, or type{" "}
+          <span className="t-strong">portfolio --help</span> for every command
+        </p>
+      ) : null}
     </div>
   );
 }

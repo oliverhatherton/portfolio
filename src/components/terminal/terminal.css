@@ -2,6 +2,7 @@
   --t-green: #4ade80;
   --t-green-bright: #86efac;
   --t-green-dim: rgba(74, 222, 128, 0.74);
+  --t-ghost: rgba(74, 222, 128, 0.38);
   --t-black: #050706;
 
   height: 100svh;
@@ -393,9 +394,23 @@
   align-items: center;
   gap: 0.5rem;
   margin-top: 1rem;
+  /* same line box as an echoed command, so the prompt doesn't shift when
+     the typed line turns into output */
+  line-height: 1.65;
+}
+/* nothing printed yet: the prompt sits where the first echo will */
+.t-output:empty + .t-input-row {
+  margin-top: 0;
+}
+.t-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
 }
 .t-input {
-  flex: 1;
+  width: 100%;
+  height: 1.65em;
+  line-height: inherit;
   min-width: 0;
   background: transparent;
   border: none;
@@ -403,8 +418,70 @@
   color: var(--t-green-bright);
   font-family: var(--mono);
   font-size: 1rem;
-  caret-color: var(--t-green);
+  caret-color: transparent;
   padding: 0;
+}
+
+/* block cursor + ghost suggestion, drawn over the input in the same metrics */
+.t-input-mirror {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: pre;
+  pointer-events: none;
+  font-family: var(--mono);
+  font-size: 1rem;
+}
+.t-mirror-typed {
+  color: transparent;
+}
+.t-cursor {
+  --t-cursor-off: transparent;
+  color: var(--t-black);
+  background: var(--t-green);
+  animation: t-blink 1.06s steps(1) 0.5s infinite;
+}
+.t-cursor.is-ghost {
+  --t-cursor-off: var(--t-ghost);
+}
+.t-cursor.is-idle {
+  color: var(--t-cursor-off);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--t-green);
+  animation: none;
+}
+@keyframes t-blink {
+  50% {
+    color: var(--t-cursor-off);
+    background: transparent;
+  }
+}
+.t-ghost {
+  color: var(--t-ghost);
+}
+
+/* zsh-style completion list under the prompt */
+.t-tablist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.1rem 1.4rem;
+  margin-top: 0.4rem;
+  color: var(--t-green-dim);
+}
+.t-tablist li {
+  padding: 0 0.3rem;
+}
+.t-tablist li.is-active {
+  color: var(--t-black);
+  background: var(--t-green);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-cursor {
+    animation: none;
+  }
 }
 
 @media (max-width: 600px) {

@@ -497,6 +497,48 @@ export function resolveName(name) {
   return SUB_ALIAS[name] || null;
 }
 
+/* edit distance between two words, for "did you mean" suggestions. */
+function distance(a, b) {
+  const row = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i += 1) {
+    let prev = row[0];
+    row[0] = i;
+    for (let j = 1; j <= b.length; j += 1) {
+      const above = row[j];
+      row[j] = Math.min(
+        row[j] + 1,
+        row[j - 1] + 1,
+        prev + (a[i - 1] === b[j - 1] ? 0 : 1),
+      );
+      prev = above;
+    }
+  }
+  return row[b.length];
+}
+
+/* closest word in `pool` to a typo, or null when nothing is near enough. */
+export function closest(name, pool) {
+  let best = null;
+  let bestDist = Infinity;
+  for (const cand of pool) {
+    const d = distance(name, cand);
+    if (d < bestDist) {
+      best = cand;
+      bestDist = d;
+    }
+  }
+  return bestDist <= (name.length <= 4 ? 1 : 2) ? best : null;
+}
+
+/* canonical command for a mistyped sub (`experiance` → `experience`), or null. */
+export function suggestSub(name) {
+  const visible = Object.keys(SUB_ALIAS).filter(
+    (k) => !subcommands[SUB_ALIAS[k]].hidden,
+  );
+  const hit = closest(name, visible);
+  return hit ? SUB_ALIAS[hit] : null;
+}
+
 /* names offered by Tab autocomplete (after `portfolio `), kept in help order. */
 export const subNames = [
   ...HELP_ORDER.filter((n) => n !== "clear"),

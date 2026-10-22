@@ -2,7 +2,7 @@ export const bioParagraphs = [
   "It started on a second-hand MacBook running Minecraft at about 45fps, which got me hooked on how software actually worked. I got my first coding book at ten and never really stopped: IT and Computer Science at school through GCSE and A-Level, and now a BSc in Software Engineering at the University of Huddersfield, on track for First-Class Honours. I didn't fall into this field; I kept choosing it.",
   "What pulled me in is the mix of art and engineering. There are always a dozen ways to solve a problem, and finding the elegant one is the fun part. I care most about understanding things properly: how a system behaves under load, why a design decision was made, what happens when the network drops a packet. Surface-level knowledge has never sat well with me.",
   "I joined Babcock International in Bristol as a Year in Industry Software Engineer, and it's where I found my love for backend work. My first project was a monitoring and configuration platform for specialist hardware, handed to me as a Rust, Tokio and Tauri codebase. Having never written a line of Rust, a couple of months of deliberate daily learning later I was shipping features and fixing defects in it. My second project moved me onto command and control software for radio equipment in Java and Vue, where over my first three months I shipped 11 tickets spanning user stories, technical debt and bug fixes.",
-  "Outside of work I build things to understand them properly. Right now that's the Order Lifecycle Application, a NestJS backend that models an order's full life as an event-driven workflow over RabbitMQ: idempotent consumers, dead-letter queues, the dual-write problem and recovery from partial failure. It's less a product and more a worked example of the patterns a real distributed system needs.",
+  "Outside of work I build things to understand them properly. Right now that's the Distributed Order Processing Platform, a NestJS backend that models an order's full life as an event-driven workflow over RabbitMQ: idempotent consumers, dead-letter queues, the dual-write problem and recovery from partial failure. It's less a product and more a worked example of the patterns a real distributed system needs.",
   "Away from a keyboard I'm a McLaren F1 die-hard. Lights out on a Sunday and you won't get much out of me. I'm into motorsport more broadly (WEC, IMSA, GTWC), a bit of sim racing and gaming, and there's pretty much always music on while I build. I'm looking for a graduate backend role from mid-2027, somewhere I can take on difficult problems and be trusted to either know the answer or go and find it.",
 ];
 
@@ -128,8 +128,8 @@ export const interests = [
 export const values = ["curiosity", "integrity", "ownership", "growth", "family", "stability"];
 
 export const currently = {
-  workingOn: ["Order Lifecycle Application"],
-  learning: ["System design, through building the Order Lifecycle Application"],
+  workingOn: ["Distributed Order Processing Platform"],
+  learning: ["System design, through building the Distributed Order Processing Platform"],
   // "watching" is computed live in the terminal component from the F1 API.
   lookingFor: ["Graduate backend opportunities (2027)"],
 };
@@ -137,7 +137,7 @@ export const currently = {
 export const projects = [
   {
     name: "order-lifecycle-backend",
-    title: "Order Lifecycle Application",
+    title: "Distributed Order Processing Platform",
     tag: "Distributed systems",
     date: "2025",
     href: "https://order-lifecycle.oliverhatherton.com",

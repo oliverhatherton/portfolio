@@ -20,9 +20,19 @@ export default function useWindowManager() {
     (id, { title, app, props, width = 460, height = 540 } = {}) => {
       if (!isDesktop()) return false;
 
+      // Keep the whole window on screen: short laptop displays can't fit a
+      // 720px-tall CV, so the window shrinks and its body scrolls instead.
+      const x = 110;
+      const y = 80;
+      const gap = 24;
+      const fit = {
+        width: Math.min(width, window.innerWidth - x - gap),
+        height: Math.min(height, window.innerHeight - y - gap),
+      };
+
       setWin((prev) => {
         if (prev?.id === id) return prev; // already showing, leave it where it is
-        return { id, title, app, props, width, height, x: 110, y: 80 };
+        return { id, title, app, props, ...fit, x, y };
       });
       return true;
     },

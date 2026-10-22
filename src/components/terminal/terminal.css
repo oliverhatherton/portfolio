@@ -222,51 +222,6 @@
   gap: 0 1rem;
 }
 
-/* ---- Status bar: a tmux line of section shortcuts ---- */
-.t-statusbar {
-  display: flex;
-  flex: none;
-  align-items: center;
-  padding: 0 0.4rem;
-  background: var(--t-green);
-  color: var(--t-black);
-  font-family: var(--mono);
-  font-size: 0.85rem;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.t-statusbar::-webkit-scrollbar {
-  display: none;
-}
-.t-status-session {
-  flex: none;
-  font-weight: 700;
-  padding: 0 0.6rem 0 0.4rem;
-}
-.t-status-cmd {
-  flex: none;
-  min-height: 2rem;
-  padding: 0 0.6rem;
-  font-family: var(--mono);
-  font-size: inherit;
-  color: var(--t-black);
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-}
-.t-status-cmd:hover {
-  background: rgba(5, 7, 6, 0.14);
-}
-.t-status-cmd[aria-current="true"] {
-  color: var(--t-green-bright);
-  background: var(--t-black);
-}
-.t-status-cmd:focus-visible {
-  outline-color: var(--t-black);
-  outline-offset: -3px;
-}
-
 /* ---- Lists ---- */
 .t-list {
   display: flex;
@@ -380,6 +335,58 @@
   gap: 0.5rem;
 }
 
+/* ---- Status bar: a tmux line of section shortcuts, small screens only ---- */
+.t-statusbar {
+  display: none;
+  flex: none;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0 0.4rem;
+  background: var(--t-green);
+  color: var(--t-black);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+.t-status-session {
+  flex: none;
+  font-weight: 700;
+  padding: 0 0.6rem 0 0.4rem;
+}
+.t-status-cmd {
+  flex: none;
+  min-height: 2.5rem;
+  padding: 0 0.6rem;
+  font-family: var(--mono);
+  font-size: inherit;
+  color: var(--t-black);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.t-status-cmd:hover {
+  background: rgba(5, 7, 6, 0.14);
+}
+.t-status-cmd[aria-current="true"] {
+  color: var(--t-green-bright);
+  background: var(--t-black);
+}
+.t-status-cmd:focus-visible {
+  outline-color: var(--t-black);
+  outline-offset: -3px;
+}
+
+/* matches the window manager's desktop query: below it, the bar takes over
+   from the intro's sections row */
+@media (max-width: 859px) {
+  .t-statusbar {
+    display: flex;
+  }
+  .t-fetch-sections {
+    display: none;
+  }
+}
+
 /* ---- Input ---- */
 .t-input-row {
   display: flex;
@@ -408,15 +415,11 @@
   .t-titlebar-text {
     display: none;
   }
-  .t-statusbar {
-    flex-wrap: wrap;
-    overflow-x: visible;
-  }
-  .t-status-cmd {
-    min-height: 2.5rem;
-  }
   .t-fetch-row {
     grid-template-columns: 5.5rem 1fr;
     gap: 0.6rem;
+  }
+  .t-fetch-links .t-cmd {
+    padding: 0.35rem 0;
   }
 }

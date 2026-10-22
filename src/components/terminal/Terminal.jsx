@@ -7,8 +7,9 @@ import WindowManager from "../windows/WindowManager";
 
 const PROMPT = "~ %";
 const HELP_WORDS = ["", "--help", "-h", "help", "?"];
-/* Sections pinned to the status bar, so nothing requires typing. */
-const QUICK = ["about", "experience", "projects", "skills", "grades", "contact", "cv"];
+/* Sections offered as tappable commands (intro row on desktop, status bar
+   on small screens), so nothing requires typing. */
+const QUICK = ["about", "experience", "projects", "skills", "grades", "contact"];
 
 // Touch devices: focusing the input pops the keyboard over the content, so
 // only focus it when the visitor taps the prompt itself.
@@ -341,9 +342,10 @@ export default function Terminal() {
           </div>
         </main>
 
+        {/* Shown below the desktop breakpoint only, where there are no windows. */}
         <nav className="t-statusbar" aria-label="Portfolio sections">
           <span className="t-status-session" aria-hidden="true">[portfolio]</span>
-          {QUICK.map((name) => (
+          {[...QUICK, "cv"].map((name) => (
             <button
               type="button"
               key={name}
@@ -393,7 +395,22 @@ function Banner({ run, first = false }) {
             <dd>{value}</dd>
           </div>
         ))}
-        <div className="t-fetch-row" style={{ "--i": 6 }}>
+        <div className="t-fetch-row t-fetch-sections" style={{ "--i": 6 }}>
+          <dt>sections</dt>
+          <dd className="t-fetch-links">
+            {QUICK.map((name) => (
+              <button
+                type="button"
+                key={name}
+                className="t-cmd"
+                onClick={() => run(`portfolio ${name}`)}
+              >
+                {name}
+              </button>
+            ))}
+          </dd>
+        </div>
+        <div className="t-fetch-row" style={{ "--i": 7 }}>
           <dt>cv</dt>
           <dd className="t-fetch-links">
             <button type="button" className="t-cmd" onClick={() => run("portfolio cv")}>
@@ -404,7 +421,7 @@ function Banner({ run, first = false }) {
             </a>
           </dd>
         </div>
-        <div className="t-fetch-row" style={{ "--i": 7 }}>
+        <div className="t-fetch-row" style={{ "--i": 8 }}>
           <dt>links</dt>
           <dd className="t-fetch-links">
             {socials.map((s) => (
@@ -421,8 +438,8 @@ function Banner({ run, first = false }) {
         </div>
       </dl>
       {first ? (
-        <p className="t-line t-dim t-fetch-hint" style={{ "--i": 8 }}>
-          pick a section below, or type{" "}
+        <p className="t-line t-dim t-fetch-hint" style={{ "--i": 9 }}>
+          pick a section, or type{" "}
           <span className="t-strong">portfolio --help</span> for every command
         </p>
       ) : null}
